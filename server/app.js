@@ -3,6 +3,8 @@ const { apiRouter } = require('./apiRouter');
 const app = express();
 require('dotenv').config();
 
+app.use( express.json() );
+
 app.use( (req, res, next) => {
   if (process.env.ENV === 'DEV'){
     console.log(`\nIncoming ${req.method} request to ${req.path}`);
