@@ -4,7 +4,26 @@ module.exports = {
 
   queryAllByUser: function queryAllLogsByUser(userId){
     return new Promise( (resolve, reject) => {
-      pool.query(`SELECT * FROM dev_timelogs`)
+      pool.query(`
+        SELECT 
+            id, 
+            user, 
+            in_time, 
+            out_time, 
+            total_time, 
+            rate, 
+            value, 
+            (SELECT array(
+                SELECT t2.tag_name
+                FROM dev_logtags t1
+                LEFT JOIN dev_tags t2
+                ON t1.tag_id=t2.tag_id
+                WHERE log_id=dev_timelogs.id
+                GROUP BY t1.tag_id, t2.tag_name
+            ) AS TAGS)
+        FROM dev_timelogs;
+        `
+      )
       .then( ({rows}) => resolve(rows) )
       .catch( reject );
     });
