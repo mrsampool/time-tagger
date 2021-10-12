@@ -10,11 +10,11 @@ module.exports = {
     });
   },
 
-  clockIn: function clockIn(userId){
+  clockIn: function clockIn(userId, rate){
     return new Promise( (resolve, reject) => {
       pool.query(
-        `INSERT INTO dev_timelogs (user_id, rate) VALUES ($1, 2500) RETURNING id;`,
-        [userId]
+        `INSERT INTO dev_timelogs (user_id, rate) VALUES ($1, $2) RETURNING id;`,
+        [userId, rate]
       ).then( ({rows}) => resolve(rows[0].id) )
       .catch( reject );
     });

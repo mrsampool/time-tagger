@@ -22,9 +22,15 @@ CREATE TABLE dev_timelogs (
     value INTEGER DEFAULT NULL
 );
 
+CREATE TABLE dev_tags (
+    tag_id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    tag_name VARCHAR (100) NOT NULL
+);
+
 CREATE TABLE dev_logtags (
     log_id INTEGER NOT NULL,
-    tag VARCHAR (100)
+    tag_id INTEGER NOT NULL
 );
 
 INSERT INTO users (username, first_name, last_name, email) VALUES ('dev', 'dev', 'dev', 'dev');
