@@ -1,0 +1,1 @@
+INSERT INTO dev_timelogs (user_id, rate) VALUES ($1, $2);

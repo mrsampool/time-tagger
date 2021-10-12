@@ -16,10 +16,10 @@ CREATE TABLE dev_timelogs (
     id SERIAL PRIMARY KEY,
     user_id INTEGER NOT NULL,
     in_time timestamptz DEFAULT CURRENT_TIMESTAMP,
-    out_time timestamptz DEFAULT CURRENT_TIMESTAMP,
-    total_time INTEGER,
-    rate INTEGER,
-    value INTEGER
+    out_time timestamptz DEFAULT NULL,
+    total_time interval DEFAULT NULL,
+    rate INTEGER NOT NULL,
+    value INTEGER DEFAULT NULL
 );
 
 CREATE TABLE dev_logtags (
