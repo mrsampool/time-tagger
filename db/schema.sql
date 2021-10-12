@@ -2,7 +2,7 @@ DROP DATABASE IF EXISTS timetagger;
 CREATE DATABASE timetagger;
 \c timetagger;
 
-DROP TABLE IF EXISTS users, dev_timelogs, dev_logtags;
+DROP TABLE IF EXISTS users, dev_timelogs, dev_tags, dev_logtags;
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
