@@ -4,8 +4,14 @@
   "description": "a full-stack web app for tracking working time",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "Sam Pool",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "pg": "^8.7.1"
+  },
+  "devDependencies": {
+    "jest": "^27.2.5"
+  }
 }
