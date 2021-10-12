@@ -1,0 +1,11 @@
+{
+  "name": "time-tagger",
+  "version": "1.0.0",
+  "description": "a full-stack web app for tracking working time",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sam Pool",
+  "license": "ISC"
+}
