@@ -33,6 +33,7 @@ describe('Timelog model', ()=>{
             ['total_time', 'object'],
             ['rate', 'number'],
             ['value', 'number'],
+            ['tags', 'object'],
           ]
         );
       });
