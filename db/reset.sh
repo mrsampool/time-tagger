@@ -1,0 +1,1 @@
+psql < schema.sql -U postgres
