@@ -4,18 +4,29 @@
   "description": "a full-stack web app for tracking working time",
   "main": "server/index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "dev-build": "webpack --config webpack.config.js -w"
   },
   "author": "Sam Pool",
   "license": "ISC",
   "dependencies": {
+    "@babel/preset-env": "^7.15.8",
+    "@babel/preset-react": "^7.14.5",
+    "babel": "^6.23.0",
+    "babel-loader": "^8.2.2",
     "express": "^4.17.1",
-    "pg": "^8.7.1"
+    "pg": "^8.7.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   },
   "devDependencies": {
+    "compression-webpack-plugin": "^9.0.0",
     "dotenv": "^10.0.0",
     "jest": "^27.2.5",
+    "mini-css-extract-plugin": "^2.4.2",
     "nodemon": "^2.0.13",
-    "supertest": "^6.1.6"
+    "supertest": "^6.1.6",
+    "webpack": "^5.58.1",
+    "webpack-cli": "^4.9.0"
   }
 }

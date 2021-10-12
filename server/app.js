@@ -4,6 +4,7 @@ const app = express();
 require('dotenv').config();
 
 app.use( express.json() );
+//app.use( express.static( path.join))
 
 app.use( (req, res, next) => {
   if (process.env.ENV === 'DEV'){
