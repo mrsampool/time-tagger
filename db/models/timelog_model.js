@@ -10,10 +10,10 @@ module.exports = {
             to_char(in_time, 'Dy MM.DD.YY') AS inDate,
             to_char(out_time, 'Dy MM.DD.YY') AS outDate,
             to_char( in_time, 'HH:MI am' ) AS inTime,
-            to_char( out_time, 'HH:MI am' ) AS outTime, 
-            total_time, 
-            (rate / 100) AS rate, 
-            (value / 100) AS value, 
+            to_char( out_time, 'HH:MI am' ) AS outTime,
+            to_char( total_time, 'HH24h MIm SSs' ) AS totalTime,
+            rate, 
+            value, 
             (SELECT array(
                 SELECT t2.tag_name
                 FROM dev_logtags t1
