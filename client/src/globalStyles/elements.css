@@ -1,0 +1,27 @@
+button{
+  padding: 1rem;
+  margin: 1rem;
+  font-size: 1.2rem;
+  letter-spacing: 0.1em;
+  border-radius: 2rem;
+  border: 0;
+  background-color: var(--light);
+  color: var(--dark);
+  font-weight: 700;
+}
+
+input{
+  width: 100%;
+  font-weight: 400;
+  padding: 1rem;
+  font-size: 1.2rem;
+  letter-spacing: 0.1em;
+  border-radius: 2rem;
+  border: 0;
+}
+
+.tag{
+  background-color: var(--light);
+  border-radius: 2rem;
+  padding: 0.5rem 1rem;
+}

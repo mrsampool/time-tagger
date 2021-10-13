@@ -7,7 +7,7 @@ import './LogEntry.css';
 export const LogEntry = (props) =>{
   const {entry} = props;
   return(
-    <div className='log-entry'>
+    <div className={`log-entry ${!entry.outtime ? 'current' : ''}`}>
       <div className='datetime-info'>
         <div className='data-field dates'>
           <span>{entry.indate}</span>
@@ -24,14 +24,17 @@ export const LogEntry = (props) =>{
           <span>{entry.totaltime}</span>
           <span>${entry.rate / 100}/hr</span>
         </div>
-        <div className='data-field value'>
-          <span>{entry.value !== null ? `$${entry.value / 100}`:''}</span>
-        </div>
+        {
+          entry.value !== null ?
+            <div className='data-field value'>
+              <span>{entry.value !== null ? `$${entry.value / 100}`:''}</span>
+            </div> : null
+        }
       </div>
       <div className='tags'>
         {
           entry.tags.length ? entry.tags.map( tag => {
-            return <span>{tag}</span>
+            return <span className='tag'>{tag}</span>
           }) : null
         }
       </div>

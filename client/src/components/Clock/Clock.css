@@ -6,3 +6,40 @@
   justify-content: center;
   align-items: center;
 }
+#logo{
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-weight: 700;
+  color: var(--light);
+  font-size: 3rem;
+  border-radius: 3rem;
+  padding: 1rem;
+}
+#clocked-time{
+  font-size: 2.5rem;
+  border-radius: 3rem;
+  font-weight: 700;
+  color: var(--light);
+}
+.clocked-time-label{
+  color: var(--light);
+  font-size: 2rem;
+}
+#clock-in, #clock-out{
+  font-weight: 700;
+  font-size: 2rem;
+}
+#clock-in{
+  background-color: lightgreen;
+}
+#clock-out{
+  background-color: salmon;
+}
+#current-tags{
+  padding: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -19,15 +19,27 @@ export const Clock = (props) =>{
 
   return (
     <div id='Clock'>
-      <span>{intime || '-'}</span>
-      <button onClick={toggleClock}>
-        {clockedIn ? 'Clock Out' : 'Clock In'}
-      </button>
+      <h1 id='logo'>TimeTagger</h1>
       {
-        currentTags.length ? currentTags.map( tag => {
-          return <span>{tag}</span>
-        }) : null
+        clockedIn ?
+          <React.Fragment>
+            <p className='clocked-time-label'>clocked in since:</p>
+            <span id='clocked-time'>{intime || '-'}</span>
+          </React.Fragment> : null
       }
+      <button onClick={toggleClock} id={clockedIn ? 'clock-out' : 'clock-in'}>
+        {clockedIn ? 'CLOCK OUT' : 'CLOCK IN'}
+      </button>
+        {
+          currentTags.length ?
+            <div id='current-tags'>
+              {
+                currentTags.map( tag => {
+                  return <span className='tag'>{tag}</span>
+                })
+              }
+            </div> : null
+        }
       <form onSubmit={addTag}>
         <input id='add-tag' list='current-tags'/>
         <button>Add Tag</button>
