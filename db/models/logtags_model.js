@@ -12,25 +12,27 @@ module.exports = {
 
   tagLog: function tagLogEntryByLogIdAndTagNames(userId, logId, tagsArray){
     return new Promise( (resolve, reject) => {
-      this.queryAllByUser(userId).then( userTags =>{
-        Promise.all( tagsArray.map( inputTag =>{
+      if (tagsArray){
+        this.queryAllByUser(userId).then( userTags =>{
+          Promise.all( tagsArray.map( inputTag =>{
 
-          return new Promise( (resolve, reject) =>{
-            if (userTags.length){
-              let preTag = userTags.find( userTag => userTag.tag_name === inputTag );
-              if (preTag){
-                this.tagByTagId(logId, preTag.tag_id)
-                .then( resolve )
-                .catch( reject );
+            return new Promise( (resolve, reject) =>{
+              if (userTags.length){
+                let preTag = userTags.find( userTag => userTag.tag_name === inputTag );
+                if (preTag){
+                  this.tagByTagId(logId, preTag.tag_id)
+                  .then( resolve )
+                  .catch( reject );
+                }
               }
-            }
-            this.tagNewTag(logId, userId, inputTag)
-            .then( resolve )
-            .catch( reject );
-          });
+              this.tagNewTag(logId, userId, inputTag)
+              .then( resolve )
+              .catch( reject );
+            });
 
-        }) ).then( resolve ).catch( reject );
-      });
+          }) ).then( resolve ).catch( reject );
+        });
+      } else { resolve() }
     })
   },
 
