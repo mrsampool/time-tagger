@@ -7,12 +7,13 @@ module.exports = {
       pool.query(`
         SELECT 
             id, 
-            user, 
-            in_time, 
-            out_time, 
+            to_char(in_time, 'Dy MM.DD.YY') AS inDate,
+            to_char(out_time, 'Dy MM.DD.YY') AS outDate,
+            to_char( in_time, 'HH:MI am' ) AS inTime,
+            to_char( out_time, 'HH:MI am' ) AS outTime, 
             total_time, 
-            rate, 
-            value, 
+            (rate / 100) AS rate, 
+            (value / 100) AS value, 
             (SELECT array(
                 SELECT t2.tag_name
                 FROM dev_logtags t1
