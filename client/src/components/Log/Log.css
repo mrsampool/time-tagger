@@ -1,4 +1,4 @@
 #Log{
-  max-height: 95vh;
-  overflow-y: scroll;
+  height: 100%;
+  overflow-y: auto;
 }

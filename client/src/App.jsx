@@ -7,7 +7,7 @@ import {Log} from "./components/Log/Log.jsx";
 import {Clock} from "./components/Clock/Clock.jsx";
 
 // Utilities
-import clientUtils from "./clientUtils";
+import {clientUtils} from "./clientUtils";
 const {fetchLog, clockIn, clockOut, EmptyClock} = clientUtils;
 
 // Style Sheet
@@ -16,20 +16,23 @@ import './App.css';
 export const App = props => {
 
   const [clockedIn, setClockedIn] = useState(false);
-  const [currentClock, setCurrentClock] = useState( new EmptyClock() );
-  const [currentTags, setCurrentTags] = useState([]);
+  const [currentClock, setCurrentClock] = useState( EmptyClock );
+  const [currentTags, setCurrentTags] = useState( [] );
 
   const [log, setLog] = useState([]);
   const [userTags, setUserTags] = useState([]);
   const [userId, setUserId] = useState(1);
 
   function toggleClock(){
-    if (clockedIn){ clockOut(setClockedIn, fetchLog, setLog, setCurrentClock) }
-    else { clockIn(userId, setClockedIn, setLog, setCurrentClock) }
+    if (clockedIn){
+      clockOut(userId, setClockedIn, setLog, setCurrentClock, setUserTags)
+    } else {
+      clockIn(userId, setClockedIn, setLog, setCurrentClock, currentTags, setUserTags)
+    }
   }
 
   useEffect( ()=>{
-    fetchLog(setLog, setClockedIn, setCurrentClock);
+    fetchLog(userId, setLog, setClockedIn, setCurrentClock, setUserTags);
   }, []);
 
   return (
@@ -38,6 +41,8 @@ export const App = props => {
         clockedIn={clockedIn}
         currentClock={currentClock}
         currentTags={currentTags}
+        userTags={userTags}
+        setCurrentClock={setCurrentClock}
         setCurrentTags={setCurrentTags}
         toggleClock={toggleClock}
       />

@@ -1,9 +1,9 @@
 // Libraries
 import axios from 'axios';
 
-export default {
+export const clientUtils = {
 
-  fetchLog(setLog, setClockedIn, setCurrentClock){
+  fetchLog(userId, setLog, setClockedIn, setCurrentClock, setUserTags){
     axios.get(`/api/users/${userId}/log`)
     .then( ({data}) => {
       setLog( data.reverse() );
@@ -11,32 +11,37 @@ export default {
       if (current){
         setClockedIn( true );
         setCurrentClock(current);
-      } else { setCurrentClock( new this.EmptyClock() ) }
+      } else {
+        setCurrentClock( clientUtils.EmptyClock )
+      }
+      let tags = new Set();
+      data.forEach( log => log.tags.forEach( tag => tags.add(tag) ) );
+      setUserTags(tags);
     })
     .catch( err => console.log(err) );
   },
 
-  clockIn(userId, setClockedIn, setLog, setCurrentClock){
-    axios.post(`/api/users/${userId}/log`)
+  clockIn(userId, setClockedIn, setLog, setCurrentClock, currentTags, setUserTags){
+    axios.post(`/api/users/${userId}/log`,{tags: currentTags})
     .then( ({data}) =>{
       setClockedIn(true);
-      this.fetchLog(setLog, setClockedIn, setCurrentClock);
+      clientUtils.fetchLog(userId, setLog, setClockedIn, setCurrentClock, setUserTags);
     });
   },
 
-  clockOut(setClockedIn, setLog, setCurrentClock){
+  clockOut(userId, setClockedIn, setLog, setCurrentClock, setUserTags){
     axios.put(`/api/users/${userId}/log`)
     .then( ({data}) =>{
       setClockedIn(false);
-      this.fetchLog(setLog, setClockedIn, setCurrentClock);
+      clientUtils.fetchLog(userId, setLog, setClockedIn, setCurrentClock, setUserTags);
     })
     .catch( err => console.log(err) );
   },
 
-  EmptyClock(){
-    this.intime = null;
-    this.rate = null;
-    this.tags = [];
+  EmptyClock: {
+    intime: null,
+    rate: null,
+    tags: [],
   }
 
 };
