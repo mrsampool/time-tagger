@@ -3,61 +3,42 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
 // Sub-Components
-import {LogEntry} from "./components/LogEntry/LogEntry.jsx";
+import {Log} from "./components/Log/Log.jsx";
+import {Clock} from "./components/Clock/Clock.jsx";
+
+// Utilities
+import clientUtils from "./clientUtils";
+const {fetchLog, clockIn, clockOut, EmptyClock} = clientUtils;
 
 // Style Sheet
 import './App.css';
-import {Log} from "./components/Log/Log";
-import {Clock} from "./components/Clock/Clock";
 
 export const App = props => {
 
   const [clockedIn, setClockedIn] = useState(false);
-  const [userId, setUserId] = useState(1);
-  const [tags, setTags] = useState([]);
+  const [currentClock, setCurrentClock] = useState( new EmptyClock() );
+  const [currentTags, setCurrentTags] = useState([]);
+
   const [log, setLog] = useState([]);
-
-  function fetchLog(){
-    axios.get(`/api/users/${userId}/log`)
-    .then( ({data}) => {
-      setLog( data.reverse() );
-      setClockedIn( data.some( logEntry => !logEntry.outtime ) );
-    })
-    .catch( err => console.log(err) );
-  }
-
-  function clockIn(){
-    axios.post(`/api/users/${userId}/log`)
-    .then( ({data}) =>{
-      console.log(data);
-      setClockedIn(true);
-      fetchLog();
-    });
-  }
-
-  function clockOut(){
-    axios.put(`/api/users/${userId}/log`)
-    .then( ({data}) =>{
-      console.log(data);
-      setClockedIn(false);
-      fetchLog();
-    })
-    .catch( err => console.log(err) );
-  }
+  const [userTags, setUserTags] = useState([]);
+  const [userId, setUserId] = useState(1);
 
   function toggleClock(){
-    if (clockedIn){ clockOut() }
-    else { clockIn() }
+    if (clockedIn){ clockOut(setClockedIn, fetchLog, setLog, setCurrentClock) }
+    else { clockIn(userId, setClockedIn, setLog, setCurrentClock) }
   }
 
   useEffect( ()=>{
-    fetchLog();
+    fetchLog(setLog, setClockedIn, setCurrentClock);
   }, []);
 
   return (
     <div id='App'>
       <Clock
         clockedIn={clockedIn}
+        currentClock={currentClock}
+        currentTags={currentTags}
+        setCurrentTags={setCurrentTags}
         toggleClock={toggleClock}
       />
       <Log log={log} />
