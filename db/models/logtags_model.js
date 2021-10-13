@@ -40,7 +40,7 @@ module.exports = {
     return new Promise( (resolve, reject) => {
       pool.query(`INSERT INTO dev_logtags (log_id, tag_id) values ($1, $2)`, [logId, tagId])
       .then( data => {
-        resolve(rows);
+        resolve(data);
       })
       .catch( reject );
     })
@@ -50,11 +50,11 @@ module.exports = {
     return new Promise( (resolve, reject) => {
       pool.query(`
         WITH tid AS (
-            INSERT INTO dev_tags (user_id, tag_name) VALUES (1, 'newTag') \
+            INSERT INTO dev_tags (user_id, tag_name) VALUES ($2, $3) \
             RETURNING tag_id
         )
         INSERT INTO dev_logtags (log_id, tag_id)
-        SELECT 5, (SELECT tag_id from tid);
+        SELECT $1, (SELECT tag_id from tid);
         `, [logId, userId, tagName])
     });
   },
