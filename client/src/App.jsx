@@ -7,6 +7,8 @@ import {LogEntry} from "./components/LogEntry/LogEntry.jsx";
 
 // Style Sheet
 import './App.css';
+import {Log} from "./components/Log/Log";
+import {Clock} from "./components/Clock/Clock";
 
 export const App = props => {
 
@@ -54,23 +56,11 @@ export const App = props => {
 
   return (
     <div id='App'>
-      <div id='clock'>
-        <button onClick={toggleClock}>
-          {clockedIn ? 'Clock Out' : 'Clock In'}
-        </button>
-      </div>
-      <div id='log'>
-        {
-          log.map( entry =>{
-            return(
-              <LogEntry
-                entry={entry}
-                key={`log-entry-${entry.id}`}
-              />
-              )
-          })
-        }
-      </div>
+      <Clock
+        clockedIn={clockedIn}
+        toggleClock={toggleClock}
+      />
+      <Log log={log} />
     </div>
   )
 }
