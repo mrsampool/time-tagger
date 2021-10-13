@@ -3,6 +3,17 @@ const tags = require('../db/models/logtags_model');
 
 module.exports = {
 
+  getUserLog: function getLogByUser(req, res, next){
+    return new Promise( (resolve, reject) => {
+      timelog.queryAllByUser(req.params.userId)
+      .then( log =>{
+        res.status(200).send(log);
+        resolve();
+      })
+      .catch( reject );
+    })
+  },
+
   clockIn: function clockIn(req, res, next){
     return new Promise( (resolve, reject) =>{
       let userId = Number(req.params.userId);
