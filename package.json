@@ -5,7 +5,8 @@
   "main": "server/index.js",
   "scripts": {
     "test": "jest",
-    "dev-build": "webpack --config webpack.config.js -w"
+    "dev-build": "webpack --config webpack.config.js -w",
+    "start": "node server"
   },
   "author": "Sam Pool",
   "license": "ISC",
@@ -30,5 +31,8 @@
     "supertest": "^6.1.6",
     "webpack": "^5.58.1",
     "webpack-cli": "^4.9.0"
+  },
+  "engines": {
+    "node": "14.x"
   }
 }
