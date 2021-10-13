@@ -3,11 +3,12 @@ import React from 'react';
 
 //Stylesheet
 import './Log.css'
-import {LogEntry} from "../LogEntry/LogEntry";
+import {LogEntry} from "../LogEntry/LogEntry.jsx";
 
 export const Log = (props) =>{
+  const {log} = props;
   return (
-    <div id='log'>
+    <div id='Log'>
       {
         log.map( entry =>{
           return(
