@@ -19,16 +19,21 @@ module.exports = {
       let userId = Number(req.params.userId);
       timelog.clockIn(userId, (req.body.rate / 100) || 5000)
       .then( insertId => {
-        tags.tagLog(userId, insertId, req.body.tags)
-      }).then( resolve )
+        return tags.tagLog(userId, insertId, req.body.tags)
+      }).then( data =>{
+        res.send(data);
+      })
       .catch( reject );
     });
   },
 
   clockOut: function clockOut(req, res, next){
-    timelog.clockOut(req.params.userId)
-    .then( clockedOut => res.status(200).send(clockedOut) )
-    .catch( err => console.log(err) );
+    console.log('clock out');
+    return new Promise( (resolve, reject) => {
+      timelog.clockOut(req.params.userId)
+      .then( clockedOut => res.status(200).send(clockedOut) )
+      .catch( err => console.log(err) );
+    });
   }
 
 };
