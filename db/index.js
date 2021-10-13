@@ -1,7 +1,13 @@
 const { Pool } = require('pg');
-let dbConfig;
-if (process.env.ENV !== 'PROD'){
+let dbConfig, herokuConnection;
+if (process.env.NODE_ENV !== 'production'){
   require('dotenv').config();
   dbConfig = require('./config').dbConfig;
+} else {
+  herokuConnection = {
+    connectionString: process.env.DATABASE_URL,
+    ssl: true
+  }
 }
-module.exports.pool = new Pool(process.env.ENV === 'DEV' ? dbConfig : process.env.DATABASE_URL);
+
+module.exports.pool = new Pool(process.env.NODE_ENV !== 'production' ? dbConfig : herokuConnection);
