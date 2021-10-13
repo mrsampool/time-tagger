@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "dev-build": "webpack --config webpack.config.js -w",
-    "start": "node server"
+    "build": "webpack --config webpack.config.js",
+    "start": "webpack --config webpack.config.js & node server"
   },
   "author": "Sam Pool",
   "license": "ISC",
