@@ -1,0 +1,9 @@
+.log-entry{
+  display: flex;
+}
+
+.data-field{
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
