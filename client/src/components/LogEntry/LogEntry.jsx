@@ -17,11 +17,14 @@ export const LogEntry = (props) =>{
       </div>
       <div className='data-field times'>
         <span>{entry.intime}</span>
-        <span>{entry.out_time}</span>
+        <span>{entry.outtime || 'CURRENT'}</span>
       </div>
       <div className='data-field numbers'>
-        <span>{entry['total_time']}</span>
-        <span>${entry.rate}</span>
+        <span>{entry.totaltime}</span>
+        <span>${entry.rate / 100}/hr</span>
+      </div>
+      <div className='data-field value'>
+        <span>{entry.value !== null ? `$${entry.value / 100}`:''}</span>
       </div>
     </div>
   )
