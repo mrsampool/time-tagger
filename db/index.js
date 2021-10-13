@@ -1,6 +1,7 @@
 const { Pool } = require('pg');
-const { dbConfig } = require('./config');
+let dbConfig;
 if (process.env.ENV !== 'PROD'){
   require('dotenv').config();
+  dbConfig = require('./config').dbConfig;
 }
 module.exports.pool = new Pool(process.env.ENV === 'DEV' ? dbConfig : process.env.DATABASE_URL);
