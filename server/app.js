@@ -1,8 +1,10 @@
 // Libraries & Modules
 const express = require('express');
 const path = require('path');
-require('dotenv').config();
 const { apiRouter } = require('./apiRouter');
+if (process.env.ENV !== 'PROD'){
+  require('dotenv').config();
+}
 
 // Server Config
 const app = express();
