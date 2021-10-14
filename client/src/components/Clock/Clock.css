@@ -86,3 +86,15 @@
     font-size: 2rem;
   }
 }
+@media screen and (max-height: 700px) {
+  #Clock{
+    height: 100%;
+    overflow-y: auto;
+    justify-content: flex-start;
+  }
+  #logo{
+    position: static;
+    top: auto;
+    left: auto;
+  }
+}
