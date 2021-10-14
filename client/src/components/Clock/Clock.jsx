@@ -12,9 +12,11 @@ export const Clock = (props) =>{
 
   function addTag(e){
     e.preventDefault();
+    let tagInput = document.getElementById('add-tag');
     let tags = new Set(currentTags);
-    tags.add(document.getElementById('add-tag').value);
+    tags.add(tagInput.value);
     setCurrentTags([...tags]);
+    tagInput.value = '';
   }
 
   return (
