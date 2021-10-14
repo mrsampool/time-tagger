@@ -46,7 +46,7 @@ export const App = props => {
         setCurrentTags={setCurrentTags}
         toggleClock={toggleClock}
       />
-      <Log log={log} />
+      <Log log={log} currentTags={currentTags}/>
     </div>
   )
 }

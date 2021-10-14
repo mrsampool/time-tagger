@@ -1,16 +1,38 @@
 //React
-import React from 'react'; 
+import React, {useEffect, useState} from 'react';
+
+// Sub-Components
+import {LogEntry} from "../LogEntry/LogEntry.jsx";
+import {LogSum} from "../LogSum/LogSum";
 
 //Stylesheet
 import './Log.css'
-import {LogEntry} from "../LogEntry/LogEntry.jsx";
 
 export const Log = (props) =>{
-  const {log} = props;
+  let {log, currentTags} = props;
+
+  let [filteredLog, setFilteredLog] = useState(log);
+
+  useEffect( ()=>{
+    console.log(currentTags);
+
+    if (currentTags.length > 0){
+      console.log(currentTags.length);
+      setFilteredLog(log.filter( logEntry =>{
+        return currentTags.every( tag => {
+          return logEntry.tags.includes(tag);
+        });
+      }));
+    } else {
+      setFilteredLog(log);
+    }
+  }, [props.currentTags, props.log])
+
   return (
     <div id='Log'>
+      <LogSum log={filteredLog} />
       {
-        log.map( entry =>{
+        filteredLog.map( entry =>{
           return(
             <LogEntry
               entry={entry}

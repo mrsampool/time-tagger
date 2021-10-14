@@ -13,7 +13,6 @@ export const Clock = (props) =>{
     e.preventDefault();
     let tags = new Set(currentTags);
     tags.add(document.getElementById('add-tag').value);
-    console.log(tags);
     setCurrentTags([...tags]);
   }
 
@@ -30,6 +29,7 @@ export const Clock = (props) =>{
       <button onClick={toggleClock} id={clockedIn ? 'clock-out' : 'clock-in'}>
         {clockedIn ? 'CLOCK OUT' : 'CLOCK IN'}
       </button>
+      <p>current tags:</p>
         {
           currentTags.length ?
             <div id='current-tags'>
@@ -38,11 +38,11 @@ export const Clock = (props) =>{
                   return <span className='tag'>{tag}</span>
                 })
               }
-            </div> : null
+            </div> : <span>none</span>
         }
       <form onSubmit={addTag}>
-        <input id='add-tag' list='current-tags'/>
-        <button>Add Tag</button>
+        <input id='add-tag' list='current-tags' placeholder='write a tag for your time...'/>
+        <button>add tag</button>
         <datalist id='current-tags'>
           {
             userTags.size ? [...userTags].map( tag => {
