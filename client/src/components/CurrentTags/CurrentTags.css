@@ -1,0 +1,42 @@
+#CurrentTags{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--dark-blue);
+  border: 0.5rem solid var(--light);
+  border-radius: 3rem;
+  padding: 0.5rem 1.5rem;
+  margin: 0.5rem;
+}
+#CurrentTags p{
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--light);
+}
+#current-tags-list{
+  padding: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.tag{
+  display: flex;
+  align-items: center;
+}
+.tag button{
+  padding: 0;
+  margin: 0 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.remove-tag{
+  fill: var(--dark-blue);
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.remove-tag path{
+
+}

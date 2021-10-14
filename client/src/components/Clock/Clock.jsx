@@ -2,7 +2,8 @@
 import React from 'react'; 
 
 //Stylesheet
-import './Clock.css' 
+import './Clock.css'
+import {CurrentTags} from "../CurrentTags/CurrentTags.jsx";
 
 export const Clock = (props) =>{
 
@@ -19,27 +20,7 @@ export const Clock = (props) =>{
   return (
     <div id='Clock'>
       <h1 id='logo'>TimeTagger</h1>
-      {
-        clockedIn ?
-          <React.Fragment>
-            <p className='clocked-time-label'>clocked in since:</p>
-            <span id='clocked-time'>{intime || '-'}</span>
-          </React.Fragment> : null
-      }
-      <button onClick={toggleClock} id={clockedIn ? 'clock-out' : 'clock-in'}>
-        {clockedIn ? 'CLOCK OUT' : 'CLOCK IN'}
-      </button>
-      <p>current tags:</p>
-        {
-          currentTags.length ?
-            <div id='current-tags'>
-              {
-                currentTags.map( tag => {
-                  return <span className='tag'>{tag}</span>
-                })
-              }
-            </div> : <span>none</span>
-        }
+      <CurrentTags currentTags={currentTags} setCurrentTags={setCurrentTags}/>
       <form onSubmit={addTag}>
         <input id='add-tag' list='current-tags' placeholder='write a tag for your time...'/>
         <button>add tag</button>
@@ -51,6 +32,16 @@ export const Clock = (props) =>{
           }
         </datalist>
       </form>
+      {
+        clockedIn ?
+          <React.Fragment>
+            <p className='clocked-time-label'>clocked in since:</p>
+            <span id='clocked-time'>{intime || '-'}</span>
+          </React.Fragment> : null
+      }
+      <button onClick={toggleClock} id={clockedIn ? 'clock-out' : 'clock-in'}>
+        {clockedIn ? 'CLOCK OUT' : 'CLOCK IN'}
+      </button>
     </div>
   );
 };
