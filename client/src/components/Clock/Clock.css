@@ -36,7 +36,7 @@
 .clocked-since.out{
   opacity: 0;
 }
-#clocked-time{
+.clocked-since span{
   font-size: 2.5rem;
   border-radius: 3rem;
   font-weight: 700;

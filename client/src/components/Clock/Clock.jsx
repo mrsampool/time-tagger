@@ -7,7 +7,7 @@ import {CurrentTags} from "../CurrentTags/CurrentTags.jsx";
 
 export const Clock = (props) =>{
 
-  const {clockedIn, currentClock, currentTags, setCurrentClock, setCurrentTags, toggleClock, userTags} = props;
+  const {clockedIn, currentClock, currentTags, setCurrentClock, setCurrentTags, toggleClock, userTags, currentDlrs} = props;
   const {intime, rate, tags} = currentClock;
 
   function addTag(e){
@@ -40,6 +40,7 @@ export const Clock = (props) =>{
       <div className={`clocked-since ${ clockedIn ? 'in' : 'out' }`}>
         <p className='clocked-time-label'>clocked in since:</p>
         <span id='clocked-time'>{intime || '-'}</span>
+        <span id='clocked-dlrs'>{currentDlrs || '-'}</span>
       </div>
     </div>
   );

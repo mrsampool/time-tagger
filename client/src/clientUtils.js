@@ -10,6 +10,7 @@ export const clientUtils = {
       let current = data.find( logEntry => !logEntry.outtime );
       if (current){
         setClockedIn( true );
+        current.intimeobj = new Date( current.intimeobj );
         setCurrentClock(current);
       } else {
         setCurrentClock( clientUtils.EmptyClock )
@@ -25,6 +26,7 @@ export const clientUtils = {
     axios.post(`/api/users/${userId}/log`,{tags: currentTags})
     .then( ({data}) =>{
       let newEntry = data;
+      newEntry.intimeobj = new Date( newEntry.intimeobj );
       setClockedIn(true);
       setCurrentClock(newEntry);
       let newLog = Array.from(log);
