@@ -25,15 +25,15 @@ export const Log = (props) =>{
         });
       }));
     } else {
-      setFilteredLog(props.log);
+      setFilteredLog(log);
     }
-  });
+  }, [log, currentTags]);
 
   return (
     <div id='Log'>
       <LogSum log={filteredLog} />
       {
-          props.log.map( entry =>{
+          filteredLog.map( entry =>{
             return(
               <LogEntry
                 entry={entry}
