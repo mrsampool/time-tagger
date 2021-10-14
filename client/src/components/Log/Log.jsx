@@ -14,11 +14,7 @@ export const Log = (props) =>{
   let [filteredLog, setFilteredLog] = useState(log);
 
   useEffect( ()=>{
-    console.log('updating log');
-    console.log(currentTags);
-
     if (currentTags.length > 0){
-      console.log(currentTags.length);
       setFilteredLog(log.filter( logEntry =>{
         return currentTags.every( tag => {
           return logEntry.tags.includes(tag);

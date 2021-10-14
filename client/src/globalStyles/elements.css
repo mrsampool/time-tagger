@@ -22,6 +22,8 @@ input{
 
 .tag{
   background-color: var(--light);
+  color: var(--dark-blue);
+  font-weight: 400;
   border-radius: 2rem;
   padding: 0.5rem 1rem;
 }

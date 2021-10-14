@@ -33,8 +33,8 @@ export const LogEntry = (props) =>{
       </div>
       <div className='tags'>
         {
-          entry.tags.length ? entry.tags.map( tag => {
-            return <span className='tag'>{tag}</span>
+          entry.tags.length ? entry.tags.map( (tag,index) => {
+            return <span className='tag' key={`logentrytag${tag}${index}`}>{tag}</span>
           }) : null
         }
       </div>

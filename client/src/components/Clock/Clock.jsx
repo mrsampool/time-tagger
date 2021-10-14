@@ -27,21 +27,18 @@ export const Clock = (props) =>{
         <datalist id='current-tags'>
           {
             userTags.size ? [...userTags].map( tag => {
-              return <option value={tag}/>
+              return <option value={tag} key={`userTag${tag}`} />
             }) : null
           }
         </datalist>
       </form>
-      {
-        clockedIn ?
-          <React.Fragment>
-            <p className='clocked-time-label'>clocked in since:</p>
-            <span id='clocked-time'>{intime || '-'}</span>
-          </React.Fragment> : null
-      }
       <button onClick={toggleClock} id={clockedIn ? 'clock-out' : 'clock-in'}>
         {clockedIn ? 'CLOCK OUT' : 'CLOCK IN'}
       </button>
+      <div className={`clocked-since ${ clockedIn ? 'in' : 'out' }`}>
+        <p className='clocked-time-label'>clocked in since:</p>
+        <span id='clocked-time'>{intime || '-'}</span>
+      </div>
     </div>
   );
 };

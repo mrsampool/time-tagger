@@ -4,11 +4,13 @@
   display: grid;
   grid-template-columns: 1fr auto;
   background-color: var(--dark);
+  position: relative;
 }
 
 @media screen and (max-width: 1200px) {
   #App{
     display: flex;
     flex-direction: column;
+    height: fit-content;
   }
 }

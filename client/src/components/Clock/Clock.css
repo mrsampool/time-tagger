@@ -6,6 +6,15 @@
   justify-content: center;
   align-items: center;
 }
+
+#Clock form{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 25rem;
+}
+
+/* Logo */
 #logo{
   position: absolute;
   top: 1rem;
@@ -15,6 +24,17 @@
   font-size: 3rem;
   border-radius: 3rem;
   padding: 1rem;
+}
+
+/* Clocked Since */
+.clocked-since{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.clocked-since.out{
+  opacity: 0;
 }
 #clocked-time{
   font-size: 2.5rem;
@@ -26,9 +46,12 @@
   color: var(--light);
   font-size: 2rem;
 }
+
+/* Clock In/Out Button */
 #clock-in, #clock-out{
   font-weight: 700;
   font-size: 2rem;
+  max-width: 9em;
 }
 #clock-in{
   background-color: lightgreen;
@@ -50,5 +73,16 @@
     position: static;
     top: auto;
     left: auto;
+  }
+}
+@media screen and (max-width: 600px) {
+  #Clock form{
+    padding: 0 1rem;
+    width: 100%;
+  }
+}
+@media screen and (max-width: 400px) {
+  #logo{
+    font-size: 2rem;
   }
 }

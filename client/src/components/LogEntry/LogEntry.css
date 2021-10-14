@@ -49,5 +49,9 @@
 .log-entry .tags span{
   margin: 0.5rem;
 }
-@media screen and (max-width: 700px) {
+
+@media screen and (max-width: 1200px) {
+  .log-entry .datetime-info{
+    flex-wrap: wrap;
+  }
 }
