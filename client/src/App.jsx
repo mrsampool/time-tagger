@@ -27,7 +27,7 @@ export const App = props => {
     if (clockedIn){
       clockOut(userId, setClockedIn, setLog, setCurrentClock, setUserTags)
     } else {
-      clockIn(userId, setClockedIn, setLog, setCurrentClock, currentTags, setUserTags)
+      clockIn(userId, setClockedIn, log, setLog, setCurrentClock, currentTags, setUserTags)
     }
   }
 

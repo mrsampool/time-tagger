@@ -15,13 +15,22 @@ module.exports = {
   },
 
   clockIn: function clockIn(req, res, next){
+    let inserted;
     return new Promise( (resolve, reject) =>{
       let userId = Number(req.params.userId);
       timelog.clockIn(userId, (req.body.rate / 100) || 5000)
       .then( insertId => {
-        return tags.tagLog(userId, insertId, req.body.tags)
-      }).then( data =>{
-        res.send(data);
+        inserted = insertId;
+        tags.tagLog(userId, insertId, req.body.tags)
+        .then( data =>{
+          timelog.queryByLogId(inserted)
+          .then( data =>{
+            console.log(data[0]);
+            res.status(201).send(data[0]);
+            resolve();
+          })
+          .catch( err => console.log(err) );
+        });
       })
       .catch( reject );
     });

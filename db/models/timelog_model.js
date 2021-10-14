@@ -30,6 +30,34 @@ module.exports = {
     });
   },
 
+  queryByLogId: function queryLogsByLogId(logId){
+    return new Promise( (resolve, reject) => {
+      pool.query(`
+        SELECT 
+            id, 
+            to_char(in_time, 'Dy MM.DD.YY') AS inDate,
+            to_char(out_time, 'Dy MM.DD.YY') AS outDate,
+            to_char( in_time, 'HH:MI am' ) AS inTime,
+            to_char( out_time, 'HH:MI am' ) AS outTime,
+            to_char( total_time, 'HH24h MIm SSs' ) AS totalTime,
+            rate, 
+            value, 
+            (SELECT array(
+                SELECT t2.tag_name
+                FROM dev_logtags t1
+                LEFT JOIN dev_tags t2
+                ON t1.tag_id=t2.tag_id
+                WHERE log_id=dev_timelogs.id
+                GROUP BY t1.tag_id, t2.tag_name
+            ) AS TAGS)
+        FROM dev_timelogs
+        WHERE id=$1;
+      `,[logId])
+      .then( ({rows}) => resolve(rows) )
+      .catch( reject );
+    });
+  },
+
   clockIn: function clockIn(userId, rate){
     return new Promise( (resolve, reject) => {
       pool.query(

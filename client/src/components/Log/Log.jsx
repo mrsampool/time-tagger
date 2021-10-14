@@ -14,6 +14,7 @@ export const Log = (props) =>{
   let [filteredLog, setFilteredLog] = useState(log);
 
   useEffect( ()=>{
+    console.log('updating log');
     console.log(currentTags);
 
     if (currentTags.length > 0){
@@ -24,22 +25,22 @@ export const Log = (props) =>{
         });
       }));
     } else {
-      setFilteredLog(log);
+      setFilteredLog(props.log);
     }
-  }, [props.currentTags, props.log])
+  });
 
   return (
     <div id='Log'>
       <LogSum log={filteredLog} />
       {
-        filteredLog.map( entry =>{
-          return(
-            <LogEntry
-              entry={entry}
-              key={`log-entry-${entry.id}`}
-            />
-          )
-        })
+          props.log.map( entry =>{
+            return(
+              <LogEntry
+                entry={entry}
+                key={`log-entry-${entry.id}`}
+              />
+            )
+          })
       }
     </div>
   )

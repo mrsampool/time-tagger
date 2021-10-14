@@ -14,23 +14,35 @@ module.exports = {
     return new Promise( (resolve, reject) => {
       if (tagsArray){
         this.queryAllByUser(userId).then( userTags =>{
-          Promise.all( tagsArray.map( inputTag =>{
+
+          let tagPromises = tagsArray.map( inputTag =>{
 
             return new Promise( (resolve, reject) =>{
               if (userTags.length){
                 let preTag = userTags.find( userTag => userTag.tag_name === inputTag );
                 if (preTag){
                   this.tagByTagId(logId, preTag.tag_id)
-                  .then( resolve )
-                  .catch( reject );
+                  .then( data => resolve() )
+                  .catch( data => reject() );
+                } else {
+                  this.tagNewTag(logId, userId, inputTag)
+                  .then( data => resolve() )
+                  .catch( err => reject(err) );
                 }
+              } else {
+                this.tagNewTag(logId, userId, inputTag)
+                .then( data => resolve() )
+                .catch( err => reject(err) );
               }
-              this.tagNewTag(logId, userId, inputTag)
-              .then( resolve )
-              .catch( reject );
             });
 
-          }) ).then( resolve ).catch( reject );
+          });
+
+          Promise.all( tagPromises )
+          .then( data => {
+            resolve();
+          })
+          .catch( err => reject() );
         });
       } else { resolve() }
     })
@@ -50,12 +62,14 @@ module.exports = {
     return new Promise( (resolve, reject) => {
       pool.query(`
         WITH tid AS (
-            INSERT INTO dev_tags (user_id, tag_name) VALUES ($2, $3) \
+            INSERT INTO dev_tags (user_id, tag_name) VALUES ($2, $3)
             RETURNING tag_id
         )
         INSERT INTO dev_logtags (log_id, tag_id)
         SELECT $1, (SELECT tag_id from tid);
-        `, [logId, userId, tagName])
+        `, [logId, userId, tagName]
+      ).then( data => resolve() )
+      .catch( err => reject(err) );
     });
   },
 

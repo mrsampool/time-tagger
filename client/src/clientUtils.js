@@ -21,11 +21,15 @@ export const clientUtils = {
     .catch( err => console.log(err) );
   },
 
-  clockIn(userId, setClockedIn, setLog, setCurrentClock, currentTags, setUserTags){
+  clockIn(userId, setClockedIn, log, setLog, setCurrentClock, currentTags, setUserTags){
     axios.post(`/api/users/${userId}/log`,{tags: currentTags})
     .then( ({data}) =>{
+      let newEntry = data;
       setClockedIn(true);
-      clientUtils.fetchLog(userId, setLog, setClockedIn, setCurrentClock, setUserTags);
+      setCurrentClock(newEntry);
+      let newLog = Array.from(log);
+      newLog.unshift(newEntry);
+      setLog(newLog);
     });
   },
 

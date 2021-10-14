@@ -25,7 +25,8 @@ CREATE TABLE dev_timelogs (
 CREATE TABLE dev_tags (
     tag_id SERIAL PRIMARY KEY,
     user_id INTEGER NOT NULL,
-    tag_name VARCHAR (100) NOT NULL
+    tag_name VARCHAR (100) NOT NULL,
+    UNIQUE(tag_name)
 );
 
 CREATE TABLE dev_logtags (
