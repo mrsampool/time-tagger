@@ -6,8 +6,9 @@
   "scripts": {
     "test": "jest",
     "dev-build": "webpack --config webpack.config.js -w",
+    "dev-server": "nodemon server",
     "build": "webpack --config webpack.config.js",
-    "start": "ENV=PROD node server"
+    "start": "node server"
   },
   "author": "Sam Pool",
   "license": "ISC",

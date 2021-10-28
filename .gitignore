@@ -1,6 +1,6 @@
 .idea
 coverage/
 node_modules/
-*/config.js
 *bundle.*
 .env
+.DS_Store
