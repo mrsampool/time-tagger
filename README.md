@@ -6,6 +6,9 @@
 
 Check out a demo of the app [here](https://boiling-sea-53421.herokuapp.com/).
 
+Screenshot:
+![TimeTagger screenshot](screenshot.png)
+
 ---
 
 ## Background
