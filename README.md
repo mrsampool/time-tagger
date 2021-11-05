@@ -4,6 +4,8 @@
 
 *TimeTagger* is a fullstack web app that allows users to clock in & out with user-defined tags attached to each block of time, allowing them to track total time spent working for a particular client, on a particular project, etc.
 
+Check out a demo of the app [here](https://boiling-sea-53421.herokuapp.com/).
+
 ---
 
 ## Background
