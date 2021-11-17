@@ -21,19 +21,21 @@ app.use(session({
 }))
 app.use(passport.initialize())
 app.use(passport.session())
-app.use( express.static( path.join(__dirname, '..', 'client', 'build') ) );
 app.use( express.json() );
-
-// Serving
 app.use( (req, res, next) => {
 //  if (process.env.ENV === 'DEV'){
     console.log(`\nIncoming ${req.method} request to ${req.path}`);
     console.log(`Request Body:`)
     console.log(req.body);
     console.log(req.isAuthenticated());
+    console.log(res);
     next();
 //  }
 });
+app.use( express.static( path.join(__dirname, '..', 'client', 'build') ) );
+
+// Serving
+
 
 app.use('/api', apiRouter);
 

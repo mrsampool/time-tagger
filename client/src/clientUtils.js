@@ -22,6 +22,16 @@ export const clientUtils = {
     .catch( err => console.log(err) );
   },
 
+  fetchUser(setUser){
+    axios.get('/api/users/current')
+      .then(({data}) => {
+        if (data.user){
+          setUser(data.user);
+        }
+      })
+      .catch(err => console.log(err));
+  },
+
   clockIn(userId, setClockedIn, log, setLog, setCurrentClock, currentTags, setUserTags){
     axios.post(`/api/users/${userId}/log`,{tags: currentTags})
     .then( ({data}) =>{

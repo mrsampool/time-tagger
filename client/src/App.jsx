@@ -9,7 +9,7 @@ import {Auth} from "./components/Auth/Auth.jsx";
 
 // Utilities
 import {clientUtils} from "./clientUtils";
-const {fetchLog, clockIn, clockOut, EmptyClock} = clientUtils;
+const {fetchLog, fetchUser, clockIn, clockOut, EmptyClock} = clientUtils;
 
 // Style Sheet
 import './App.css';
@@ -46,6 +46,8 @@ export const App = props => {
   useEffect( ()=>{
     if (user){
       fetchLog(user.id, setLog, setClockedIn, setCurrentClock, setUserTags);
+    } else {
+      fetchUser(setUser);
     }
   }, [user]);
 
