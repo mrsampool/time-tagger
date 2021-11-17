@@ -13,6 +13,7 @@ const {fetchLog, fetchUser, clockIn, clockOut, EmptyClock} = clientUtils;
 
 // Style Sheet
 import './App.css';
+import {User} from "./components/User/User.jsx";
 
 export const App = props => {
 
@@ -68,6 +69,7 @@ export const App = props => {
       {
         user ? (
             <React.Fragment>
+              <User user={user}/>
               <Clock
                   clockedIn={clockedIn}
                   currentClock={currentClock}
