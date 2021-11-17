@@ -5,6 +5,7 @@ import axios from 'axios';
 // Sub-Components
 import {Log} from "./components/Log/Log.jsx";
 import {Clock} from "./components/Clock/Clock.jsx";
+import {Auth} from "./components/Auth/Auth.jsx";
 
 // Utilities
 import {clientUtils} from "./clientUtils";
@@ -22,19 +23,31 @@ export const App = props => {
 
   const [log, setLog] = useState([]);
   const [userTags, setUserTags] = useState([]);
-  const [userId, setUserId] = useState(1);
+  const [user, setUser] = useState(null);
 
   function toggleClock(){
     if (clockedIn){
-      clockOut(userId, setClockedIn, setLog, setCurrentClock, setUserTags)
+      clockOut(user.id, setClockedIn, setLog, setCurrentClock, setUserTags)
     } else {
-      clockIn(userId, setClockedIn, log, setLog, setCurrentClock, currentTags, setUserTags)
+      clockIn(user.id, setClockedIn, log, setLog, setCurrentClock, currentTags, setUserTags)
     }
   }
 
+  function logIn(creds){
+    console.log(creds);
+    axios.post('/api/login', creds)
+        .then(({data}) => {
+          if (data.user){
+            setUser(data.user);
+          }
+        });
+  }
+
   useEffect( ()=>{
-    fetchLog(userId, setLog, setClockedIn, setCurrentClock, setUserTags);
-  }, []);
+    if (user){
+      fetchLog(user.id, setLog, setClockedIn, setCurrentClock, setUserTags);
+    }
+  }, [user]);
 
   useEffect( ()=>{
     const interval = setInterval( ()=>{
@@ -50,17 +63,24 @@ export const App = props => {
 
   return (
     <div id='App'>
-      <Clock
-        clockedIn={clockedIn}
-        currentClock={currentClock}
-        currentTags={currentTags}
-        currentDlrs={currentDlrs}
-        userTags={userTags}
-        setCurrentClock={setCurrentClock}
-        setCurrentTags={setCurrentTags}
-        toggleClock={toggleClock}
-      />
-      <Log log={log} currentTags={currentTags}/>
+      {
+        user ? (
+            <React.Fragment>
+              <Clock
+                  clockedIn={clockedIn}
+                  currentClock={currentClock}
+                  currentTags={currentTags}
+                  currentDlrs={currentDlrs}
+                  userTags={userTags}
+                  setCurrentClock={setCurrentClock}
+                  setCurrentTags={setCurrentTags}
+                  toggleClock={toggleClock}
+              />
+              <Log log={log} currentTags={currentTags}/>
+            </React.Fragment>
+        ) : <Auth logIn={logIn}/>
+      }
+
     </div>
   )
 }

@@ -11,6 +11,6 @@
   #App{
     display: flex;
     flex-direction: column;
-    height: fit-content;
+    min-height: fit-content;
   }
 }

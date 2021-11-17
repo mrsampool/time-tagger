@@ -1,1 +1,1 @@
-psql < schema.sql -U postgres
+psql < schema.sql -U sampool

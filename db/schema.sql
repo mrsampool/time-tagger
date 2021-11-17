@@ -6,10 +6,10 @@ DROP TABLE IF EXISTS users, dev_timelogs, dev_tags, dev_logtags;
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
-    username VARCHAR (30),
     first_name VARCHAR (20),
     last_name VARCHAR (30),
-    email VARCHAR (40)
+    email VARCHAR (40),
+    password VARCHAR (40)
 );
 
 CREATE TABLE dev_timelogs (
@@ -34,4 +34,7 @@ CREATE TABLE dev_logtags (
     tag_id INTEGER NOT NULL
 );
 
-INSERT INTO users (username, first_name, last_name, email) VALUES ('dev', 'dev', 'dev', 'dev');
+INSERT INTO users
+(first_name, last_name, email, password)
+VALUES
+('dev', 'dev', 'dev', 'dev');

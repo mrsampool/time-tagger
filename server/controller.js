@@ -1,5 +1,7 @@
 const timelog = require('../db/models/timelog_model');
 const tags = require('../db/models/logtags_model');
+const users = require('../db/models/users_model');
+const passport = require("passport");
 
 module.exports = {
 
@@ -43,6 +45,15 @@ module.exports = {
       .then( clockedOut => res.status(200).send(clockedOut) )
       .catch( err => console.log(err) );
     });
-  }
+  },
+
+  createUser: function createUser(req, res, next){
+    console.log('create user');
+    return new Promise( (resolve, reject) => {
+      users.create(req.body.userInfo)
+          .then( data => res.status(200).send(data) )
+          .catch( err => console.log(err) );
+    });
+  },
 
 };
