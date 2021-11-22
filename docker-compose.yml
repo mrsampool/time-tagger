@@ -8,7 +8,24 @@ services:
     environment:
       POSTGRES_PASSWORD: root
     ports:
-      - "3001:5432"
+      - "5432:5432"
     build:
-      context: ./db
+      context: server/db
       dockerfile: pg.Dockerfile
+
+  app:
+    container_name: tt_app
+    image: tt-app
+    environment:
+      DB_HOST: db
+      DB_USER: postgres
+      DB_PASS: root
+      DB_NAME: timetagger
+    ports:
+      - "3000:3000"
+    depends_on:
+      - "db"
+    build:
+      context: .
+      dockerfile: node.Dockerfile
+
