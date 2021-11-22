@@ -54,6 +54,12 @@ export const clientUtils = {
     .catch( err => console.log(err) );
   },
 
+  logOut(){
+    axios.get(`/api/logout`)
+        .then((data) => console.log(data))
+        .catch((err) => console.log(err));
+  },
+
   EmptyClock: {
     intime: null,
     rate: null,
