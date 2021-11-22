@@ -9,7 +9,7 @@ import {Auth} from "./components/Auth/Auth.jsx";
 
 // Utilities
 import {clientUtils} from "./clientUtils";
-const {fetchLog, fetchUser, clockIn, clockOut, EmptyClock} = clientUtils;
+const {fetchLog, fetchUser, clockIn, clockOut, EmptyClock, createAccount} = clientUtils;
 
 // Style Sheet
 import './App.css';
@@ -91,7 +91,7 @@ export const App = props => {
               />
               <Log log={log} currentTags={currentTags}/>
             </React.Fragment>
-        ) : <Auth logIn={logIn}/>
+        ) : <Auth logIn={logIn} createAccount={createAccount}/>
       }
 
     </div>

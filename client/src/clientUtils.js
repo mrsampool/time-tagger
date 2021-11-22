@@ -54,6 +54,12 @@ export const clientUtils = {
     .catch( err => console.log(err) );
   },
 
+  createAccount(userInfo, setUser){
+    axios.post('/user')
+        .then(({data}) => setUser(data.user))
+        .catch((err) => console.log(err));
+  },
+
   logOut(){
     axios.get(`/api/logout`)
         .then((data) => console.log(data))

@@ -2,7 +2,7 @@ import React, {useState} from "react";
 
 import './Auth.css';
 
-export const Auth = ({ logIn }) => {
+export const Auth = ({ logIn, createAccount }) => {
     const [mode, setMode] = useState('login');
     function handleSubmit(e){
         e.preventDefault();
