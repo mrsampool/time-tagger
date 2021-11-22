@@ -35,13 +35,22 @@ export const App = props => {
   }
 
   function logIn(creds){
-    console.log(creds);
     axios.post('/api/login', creds)
         .then(({data}) => {
           if (data.user){
             setUser(data.user);
           }
         });
+  }
+
+  function logOut(){
+    console.log('logOut');
+    axios.get(`/api/logout`)
+        .then((data) => {
+          console.log(data);
+          setUser(null);
+        })
+        .catch((err) => console.log(err));
   }
 
   useEffect( ()=>{
@@ -69,7 +78,7 @@ export const App = props => {
       {
         user ? (
             <React.Fragment>
-              <User user={user}/>
+              <User user={user} logOut={logOut}/>
               <Clock
                   clockedIn={clockedIn}
                   currentClock={currentClock}
