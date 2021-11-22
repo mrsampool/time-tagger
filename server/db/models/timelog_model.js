@@ -1,4 +1,4 @@
-const { pool } = require('../');
+const { pool } = require('../index');
 
 module.exports = {
 

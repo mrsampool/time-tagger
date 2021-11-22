@@ -1,7 +1,7 @@
 const passport = require('passport')
 const bcrypt = require('bcrypt')
 const LocalStrategy = require('passport-local').Strategy
-const users = require('../db/models/users_model')
+const users = require('./db/models/users_model')
 
 module.exports = () => {
     passport.use(new LocalStrategy({
@@ -15,11 +15,9 @@ module.exports = () => {
                 if (!user) {
                     return done(null, false)
                 }
-                if (password !== user.password){
-                    return done(null, false)
-                }
-                console.log('success...');
-                return done(null, user)
+                bcrypt.compare(password, user.password)
+                    .then(() => { return done(null, user) })
+                    .catch((err) => { return done(null, false) });
             })
             .catch((err) => done(err));
         })

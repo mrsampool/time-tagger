@@ -1,6 +1,6 @@
-const timelog = require('../db/models/timelog_model');
-const tags = require('../db/models/logtags_model');
-const users = require('../db/models/users_model');
+const timelog = require('./db/models/timelog_model');
+const tags = require('./db/models/logtags_model');
+const users = require('./db/models/users_model');
 const passport = require("passport");
 
 module.exports = {
@@ -55,5 +55,11 @@ module.exports = {
           .catch( err => console.log(err) );
     });
   },
+
+  logOut: function logOut(req, res){
+    console.log('logOut');
+    req.logout();
+    res.sendStatus(200);
+  }
 
 };

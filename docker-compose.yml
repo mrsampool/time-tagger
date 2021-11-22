@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+
+  db:
+    container_name: tt_pg_container
+    image: tt-pg
+    environment:
+      POSTGRES_PASSWORD: root
+    ports:
+      - "3001:5432"
+    build:
+      context: ./db
+      dockerfile: pg.Dockerfile

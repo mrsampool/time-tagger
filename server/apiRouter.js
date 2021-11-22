@@ -20,6 +20,7 @@ apiRouter.post('/login', passport.authenticate('local', {}),
     (req, res, next) => {
     res.send({user: req.user});
 });
+apiRouter.get('/logout', controller.logOut);
 //TODO: apiRouter.put('/users/:userId/log/:logId', handler);
 
 module.exports.apiRouter = apiRouter;

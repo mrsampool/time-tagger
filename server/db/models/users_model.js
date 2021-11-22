@@ -1,18 +1,21 @@
-const { pool } = require('../');
+const { pool } = require('../index');
+const bcrypt = require('bcrypt');
 
 module.exports = {
 
     create: function createUser(userInfo) {
         const {email, firstName, lastName, password} = userInfo;
         return new Promise((resolve, reject) => {
-            pool.query(`
-        INSERT INTO users 
-        (first_name, last_name, email, password) 
-        VALUES 
-        ($1, $2, $3, $4);
-        `, [firstName, lastName, email, password])
-                .then(({rows}) => resolve(rows))
-                .catch(reject);
+            bcrypt.hash(password, 10).then((hashed) => {
+                pool.query(`
+                INSERT INTO users 
+                (first_name, last_name, email, password) 
+                VALUES 
+                ($1, $2, $3, $4);
+                `, [firstName, lastName, email, hashed])
+                    .then(({rows}) => resolve(rows))
+                    .catch(reject);
+            });
         });
     },
 

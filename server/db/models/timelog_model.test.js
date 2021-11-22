@@ -1,5 +1,5 @@
 const timelogModel = require('./timelog_model');
-const { expectPropsAndTypes } = require('../../utils/testUtils');
+const { expectPropsAndTypes } = require('../../../utils/testUtils');
 
 describe('Timelog model', ()=>{
 
