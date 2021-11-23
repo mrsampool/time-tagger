@@ -4,7 +4,7 @@ module.exports = {
   queryAllByUser: function queryAllTagsByUser(userId) {
     return new Promise((resolve, reject) => {
       pool
-        .query('SELECT * FROM dev_tags WHERE user_id=$1;', [userId])
+        .query('SELECT * FROM tags WHERE user_id=$1;', [userId])
         .then(({ rows }) => resolve(rows))
         .catch(reject);
     });
@@ -50,7 +50,7 @@ module.exports = {
   tagByTagId: function tagLogByTagId(logId, tagId) {
     return new Promise((resolve, reject) => {
       pool
-        .query('INSERT INTO dev_logtags (log_id, tag_id) values ($1, $2)', [
+        .query('INSERT INTO logtags (log_id, tag_id) values ($1, $2)', [
           logId,
           tagId,
         ])
@@ -67,10 +67,10 @@ module.exports = {
         .query(
           `
         WITH tid AS (
-            INSERT INTO dev_tags (user_id, tag_name) VALUES ($2, $3)
+            INSERT INTO tags (user_id, tag_name) VALUES ($2, $3)
             RETURNING tag_id
         )
-        INSERT INTO dev_logtags (log_id, tag_id)
+        INSERT INTO logtags (log_id, tag_id)
         SELECT $1, (SELECT tag_id from tid);
         `,
           [logId, userId, tagName],
@@ -84,7 +84,7 @@ module.exports = {
     return new Promise((resolve, reject) => {
       pool
         .query(
-          'INSERT INTO dev_tags (user_id, tag_name) VALUES ($1, $2) RETURNING tag_id;',
+          'INSERT INTO tags (user_id, tag_name) VALUES ($1, $2) RETURNING tag_id;',
           [userId, tagName],
         )
         .then(({ rows }) => {

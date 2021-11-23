@@ -1,24 +1,20 @@
 // Libraries & Modules
 const express = require('express');
-
-const app = express();
+const path = require('path');
 const passport = require('passport');
 const session = require('express-session');
+const PgSession = require('connect-pg-simple')(session);
+
+// Config
+const app = express();
 const { pool } = require('./db');
-const pgSession = require('connect-pg-simple')(session);
-const path = require('path');
 const { apiRouter } = require('./apiRouter');
-
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config();
-}
-
-// Middleware
 require('./authenticate')();
+require('dotenv').config();
 
 app.use(
   session({
-    store: new pgSession({ pool }),
+    store: new PgSession({ pool }),
     secret: 'my secret',
     resave: false,
     cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 },
