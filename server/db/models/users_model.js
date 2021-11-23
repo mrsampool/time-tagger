@@ -1,9 +1,11 @@
-const { pool } = require("../index");
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcrypt');
+const { pool } = require('../index');
 
 module.exports = {
   create: function createUser(userInfo) {
-    const { email, firstName, lastName, password } = userInfo;
+    const {
+      email, firstName, lastName, password,
+    } = userInfo;
     return new Promise((resolve, reject) => {
       bcrypt.hash(password, 10).then((hashed) => {
         pool
@@ -15,7 +17,7 @@ module.exports = {
                 ($1, $2, $3, $4)
                 RETURNING id, first_name, last_name, email, password;
                 `,
-            [firstName, lastName, email, hashed]
+            [firstName, lastName, email, hashed],
           )
           .then(({ rows }) => resolve(rows))
           .catch(reject);
@@ -30,7 +32,7 @@ module.exports = {
           `
         SELECT * FROM users WHERE email = $1;
         `,
-          [email]
+          [email],
         )
         .then(({ rows }) => resolve(rows[0]))
         .catch(reject);

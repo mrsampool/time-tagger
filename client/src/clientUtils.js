@@ -1,5 +1,5 @@
 // Libraries
-import axios from "axios";
+import axios from 'axios';
 
 export const clientUtils = {
   fetchLog(userId, setLog, setClockedIn, setCurrentClock, setUserTags) {
@@ -7,7 +7,7 @@ export const clientUtils = {
       .get(`/api/users/${userId}/log`)
       .then(({ data }) => {
         setLog(data.reverse());
-        let current = data.find((logEntry) => !logEntry.outtime);
+        const current = data.find((logEntry) => !logEntry.outtime);
         if (current) {
           setClockedIn(true);
           current.intimeobj = new Date(current.intimeobj);
@@ -15,7 +15,7 @@ export const clientUtils = {
         } else {
           setCurrentClock(clientUtils.EmptyClock);
         }
-        let tags = new Set();
+        const tags = new Set();
         data.forEach((log) => log.tags.forEach((tag) => tags.add(tag)));
         setUserTags(tags);
       })
@@ -24,7 +24,7 @@ export const clientUtils = {
 
   fetchUser(setUser) {
     axios
-      .get("/api/users/current")
+      .get('/api/users/current')
       .then(({ data }) => {
         if (data.user) {
           setUser(data.user);
@@ -40,16 +40,16 @@ export const clientUtils = {
     setLog,
     setCurrentClock,
     currentTags,
-    setUserTags
+    setUserTags,
   ) {
     axios
       .post(`/api/users/${userId}/log`, { tags: currentTags })
       .then(({ data }) => {
-        let newEntry = data;
+        const newEntry = data;
         newEntry.intimeobj = new Date(newEntry.intimeobj);
         setClockedIn(true);
         setCurrentClock(newEntry);
-        let newLog = Array.from(log);
+        const newLog = Array.from(log);
         newLog.unshift(newEntry);
         setLog(newLog);
       });
@@ -65,7 +65,7 @@ export const clientUtils = {
           setLog,
           setClockedIn,
           setCurrentClock,
-          setUserTags
+          setUserTags,
         );
       })
       .catch((err) => console.log(err));
@@ -73,10 +73,10 @@ export const clientUtils = {
 
   createAccount(userInfo, setMode) {
     axios
-      .post("api/users", userInfo)
+      .post('api/users', userInfo)
       .then((res) => {
         if (res && res.status === 200) {
-          setMode("login");
+          setMode('login');
         }
       })
       .catch((err) => console.log(err));
@@ -84,7 +84,7 @@ export const clientUtils = {
 
   logOut() {
     axios
-      .get(`/api/logout`)
+      .get('/api/logout')
       .then((data) => console.log(data))
       .catch((err) => console.log(err));
   },

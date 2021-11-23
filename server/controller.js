@@ -1,7 +1,7 @@
-const timelog = require("./db/models/timelog_model");
-const tags = require("./db/models/logtags_model");
-const users = require("./db/models/users_model");
-const passport = require("passport");
+const passport = require('passport');
+const timelog = require('./db/models/timelog_model');
+const tags = require('./db/models/logtags_model');
+const users = require('./db/models/users_model');
 
 module.exports = {
   getUserLog: function getLogByUser(req, res, next) {
@@ -19,7 +19,7 @@ module.exports = {
   clockIn: function clockIn(req, res, next) {
     let inserted;
     return new Promise((resolve, reject) => {
-      let userId = Number(req.params.userId);
+      const userId = Number(req.params.userId);
       timelog
         .clockIn(userId, req.body.rate / 100 || 5000)
         .then((insertId) => {
@@ -40,7 +40,7 @@ module.exports = {
   },
 
   clockOut: function clockOut(req, res, next) {
-    console.log("clock out");
+    console.log('clock out');
     return new Promise((resolve, reject) => {
       timelog
         .clockOut(req.params.userId)
@@ -50,7 +50,7 @@ module.exports = {
   },
 
   createUser: function createUser(req, res, next) {
-    console.log("create user");
+    console.log('create user');
     return new Promise((resolve, reject) => {
       users
         .create(req.body.userInfo)
@@ -62,7 +62,7 @@ module.exports = {
   },
 
   logOut: function logOut(req, res) {
-    console.log("logOut");
+    console.log('logOut');
     req.logout();
     res.sendStatus(200);
   },

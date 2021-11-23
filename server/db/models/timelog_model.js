@@ -1,4 +1,4 @@
-const { pool } = require("../index");
+const { pool } = require('../index');
 
 module.exports = {
   queryAllByUser: function queryAllLogsByUser(userId) {
@@ -25,7 +25,7 @@ module.exports = {
                 GROUP BY t1.tag_id, t2.tag_name
             ) AS TAGS)
         FROM dev_timelogs;
-        `
+        `,
         )
         .then(({ rows }) => resolve(rows))
         .catch(reject);
@@ -58,7 +58,7 @@ module.exports = {
         FROM dev_timelogs
         WHERE id=$1;
       `,
-          [logId]
+          [logId],
         )
         .then(({ rows }) => resolve(rows))
         .catch(reject);
@@ -69,8 +69,8 @@ module.exports = {
     return new Promise((resolve, reject) => {
       pool
         .query(
-          `INSERT INTO dev_timelogs (user_id, rate) VALUES ($1, $2) RETURNING id;`,
-          [userId, rate]
+          'INSERT INTO dev_timelogs (user_id, rate) VALUES ($1, $2) RETURNING id;',
+          [userId, rate],
         )
         .then(({ rows }) => resolve(rows[0].id))
         .catch(reject);
@@ -90,7 +90,7 @@ module.exports = {
           AND out_time IS NULL 
           RETURNING *;
         `,
-          [userId]
+          [userId],
         )
         .then(({ rows }) => {
           resolve(rows[0]);
@@ -102,7 +102,7 @@ module.exports = {
   deleteById: function deleteTimelogById(id) {
     return new Promise((resolve, reject) => {
       pool
-        .query(`DELETE FROM dev_timelogs WHERE id=$1`, [id])
+        .query('DELETE FROM dev_timelogs WHERE id=$1', [id])
         .then(resolve)
         .catch(reject);
     });

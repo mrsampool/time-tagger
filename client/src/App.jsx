@@ -6,6 +6,7 @@ import axios from "axios";
 import { Log } from "./components/Log/Log.jsx";
 import { Clock } from "./components/Clock/Clock.jsx";
 import { Auth } from "./components/Auth/Auth.jsx";
+import { User } from "./components/User/User.jsx";
 
 // Utilities
 import { clientUtils } from "./clientUtils";
@@ -14,7 +15,6 @@ const { fetchLog, fetchUser, clockIn, clockOut, EmptyClock, createAccount } =
 
 // Style Sheet
 import "./App.css";
-import { User } from "./components/User/User.jsx";
 
 export const App = (props) => {
   const [clockedIn, setClockedIn] = useState(false);
@@ -37,7 +37,7 @@ export const App = (props) => {
         setLog,
         setCurrentClock,
         currentTags,
-        setUserTags
+         setUserTags
       );
     }
   }

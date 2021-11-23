@@ -1,10 +1,10 @@
-const { pool } = require("../index");
+const { pool } = require('../index');
 
 module.exports = {
   queryAllByUser: function queryAllTagsByUser(userId) {
     return new Promise((resolve, reject) => {
       pool
-        .query(`SELECT * FROM dev_tags WHERE user_id=$1;`, [userId])
+        .query('SELECT * FROM dev_tags WHERE user_id=$1;', [userId])
         .then(({ rows }) => resolve(rows))
         .catch(reject);
     });
@@ -14,28 +14,26 @@ module.exports = {
     return new Promise((resolve, reject) => {
       if (tagsArray) {
         this.queryAllByUser(userId).then((userTags) => {
-          let tagPromises = tagsArray.map((inputTag) => {
-            return new Promise((resolve, reject) => {
-              if (userTags.length) {
-                let preTag = userTags.find(
-                  (userTag) => userTag.tag_name === inputTag
-                );
-                if (preTag) {
-                  this.tagByTagId(logId, preTag.tag_id)
-                    .then((data) => resolve())
-                    .catch((data) => reject());
-                } else {
-                  this.tagNewTag(logId, userId, inputTag)
-                    .then((data) => resolve())
-                    .catch((err) => reject(err));
-                }
+          const tagPromises = tagsArray.map((inputTag) => new Promise((resolve, reject) => {
+            if (userTags.length) {
+              const preTag = userTags.find(
+                (userTag) => userTag.tag_name === inputTag,
+              );
+              if (preTag) {
+                this.tagByTagId(logId, preTag.tag_id)
+                  .then((data) => resolve())
+                  .catch((data) => reject());
               } else {
                 this.tagNewTag(logId, userId, inputTag)
                   .then((data) => resolve())
                   .catch((err) => reject(err));
               }
-            });
-          });
+            } else {
+              this.tagNewTag(logId, userId, inputTag)
+                .then((data) => resolve())
+                .catch((err) => reject(err));
+            }
+          }));
 
           Promise.all(tagPromises)
             .then((data) => {
@@ -52,7 +50,7 @@ module.exports = {
   tagByTagId: function tagLogByTagId(logId, tagId) {
     return new Promise((resolve, reject) => {
       pool
-        .query(`INSERT INTO dev_logtags (log_id, tag_id) values ($1, $2)`, [
+        .query('INSERT INTO dev_logtags (log_id, tag_id) values ($1, $2)', [
           logId,
           tagId,
         ])
@@ -75,7 +73,7 @@ module.exports = {
         INSERT INTO dev_logtags (log_id, tag_id)
         SELECT $1, (SELECT tag_id from tid);
         `,
-          [logId, userId, tagName]
+          [logId, userId, tagName],
         )
         .then((data) => resolve())
         .catch((err) => reject(err));
@@ -86,8 +84,8 @@ module.exports = {
     return new Promise((resolve, reject) => {
       pool
         .query(
-          `INSERT INTO dev_tags (user_id, tag_name) VALUES ($1, $2) RETURNING tag_id;`,
-          [userId, tagName]
+          'INSERT INTO dev_tags (user_id, tag_name) VALUES ($1, $2) RETURNING tag_id;',
+          [userId, tagName],
         )
         .then(({ rows }) => {
           resolve(rows[0].tag_id);

@@ -1,17 +1,17 @@
-const passport = require("passport");
-const bcrypt = require("bcrypt");
-const LocalStrategy = require("passport-local").Strategy;
-const users = require("./db/models/users_model");
+const passport = require('passport');
+const bcrypt = require('bcrypt');
+const LocalStrategy = require('passport-local').Strategy;
+const users = require('./db/models/users_model');
 
 module.exports = () => {
   passport.use(
     new LocalStrategy(
       {
-        usernameField: "email",
-        passwordField: "password",
+        usernameField: 'email',
+        passwordField: 'password',
       },
       (email, password, done) => {
-        console.log("auth...");
+        console.log('auth...');
         users
           .find(email)
           .then((user) => {
@@ -20,22 +20,18 @@ module.exports = () => {
             }
             bcrypt
               .compare(password, user.password)
-              .then(() => {
-                return done(null, user);
-              })
-              .catch((err) => {
-                return done(null, false);
-              });
+              .then(() => done(null, user))
+              .catch((err) => done(null, false));
           })
           .catch((err) => done(err));
-      }
-    )
+      },
+    ),
   );
-  passport.serializeUser(function (user, done) {
+  passport.serializeUser((user, done) => {
     done(null, user);
   });
 
-  passport.deserializeUser(function (user, done) {
+  passport.deserializeUser((user, done) => {
     done(null, user);
   });
 };
