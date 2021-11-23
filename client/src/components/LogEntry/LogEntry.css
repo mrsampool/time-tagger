@@ -1,4 +1,4 @@
-.log-entry{
+.log-entry {
   /* Display */
   display: flex;
   flex-direction: column;
@@ -9,22 +9,22 @@
   border-radius: 3rem;
   background-color: var(--dark-blue);
 }
-.log-entry.current{
+.log-entry.current {
   background-color: salmon;
   color: maroon;
 }
-.log-entry.current span{
+.log-entry.current span {
   color: maroon;
 }
 
-.log-entry .datetime-info{
+.log-entry .datetime-info {
   display: flex;
   width: 100%;
   justify-content: space-evenly;
   align-items: center;
 }
 
-.data-field{
+.data-field {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -36,22 +36,22 @@
   font-weight: 400;
   border-radius: 1rem;
 }
-.data-field span{
+.data-field span {
   font-weight: 400;
   width: max-content;
 }
-.log-entry .tags{
+.log-entry .tags {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: center;
 }
-.log-entry .tags span{
+.log-entry .tags span {
   margin: 0.5rem;
 }
 
 @media screen and (max-width: 1200px) {
-  .log-entry .datetime-info{
+  .log-entry .datetime-info {
     flex-wrap: wrap;
   }
 }

@@ -1,32 +1,32 @@
-#User{
-    /* position */
-    position: fixed;
-    top: 0;
-    right: 1rem;
-    z-index: 3;
+#User {
+  /* position */
+  position: fixed;
+  top: 0;
+  right: 1rem;
+  z-index: 3;
 
-    /* display */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  /* display */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-    /* spacing */
-    padding: 0.25rem 1rem;
-    margin: 0.25rem;
+  /* spacing */
+  padding: 0.25rem 1rem;
+  margin: 0.25rem;
 
-    /* font */
-    font-size: 1.5rem;
-    font-weight: 400;
-    color: var(--light);
+  /* font */
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--light);
 
-    /* background & border */
-    background-color: var(--dark);
-    border-radius: 3rem;
-    border: 0.25rem solid var(--light);
+  /* background & border */
+  background-color: var(--dark);
+  border-radius: 3rem;
+  border: 0.25rem solid var(--light);
 }
-#User button{
-    display: flex;
-    justify-content: center;
-    margin: 0rem;
-    padding: 0.1rem 0.5rem;
+#User button {
+  display: flex;
+  justify-content: center;
+  margin: 0rem;
+  padding: 0.1rem 0.5rem;
 }

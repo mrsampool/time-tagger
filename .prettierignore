@@ -1,0 +1,8 @@
+node_modules
+build
+.idea
+*.html
+package.json
+package-lock.json
+docker-compose.yml
+babel.config.js

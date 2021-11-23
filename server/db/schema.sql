@@ -2,7 +2,7 @@ DROP DATABASE IF EXISTS timetagger;
 CREATE DATABASE timetagger;
 \c timetagger;
 
-DROP TABLE IF EXISTS users, dev_timelogs, dev_tags, dev_logtags, "session";
+DROP TABLE IF EXISTS users, timelogs, tags, logtags, "session";
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
@@ -12,7 +12,7 @@ CREATE TABLE users (
     password VARCHAR (100)
 );
 
-CREATE TABLE dev_timelogs (
+CREATE TABLE timelogs (
     id SERIAL PRIMARY KEY,
     user_id INTEGER NOT NULL,
     in_time timestamptz DEFAULT CURRENT_TIMESTAMP,
@@ -22,14 +22,14 @@ CREATE TABLE dev_timelogs (
     value INTEGER DEFAULT NULL
 );
 
-CREATE TABLE dev_tags (
+CREATE TABLE tags (
     tag_id SERIAL PRIMARY KEY,
     user_id INTEGER NOT NULL,
     tag_name VARCHAR (100) NOT NULL,
     UNIQUE(tag_name)
 );
 
-CREATE TABLE dev_logtags (
+CREATE TABLE logtags (
     log_id INTEGER NOT NULL,
     tag_id INTEGER NOT NULL
 );
@@ -48,4 +48,4 @@ CREATE INDEX "IDX_session_expire" ON "session" ("expire");
 INSERT INTO users
 (first_name, last_name, email, password)
 VALUES
-('dev', 'dev', 'dev', 'dev');
+('demo', 'demo', 'demo', 'demo');

@@ -1,10 +1,10 @@
-#LogSum{
+#LogSum {
   position: sticky;
   top: 0;
   display: flex;
   justify-content: flex-start;
 }
-#LogSum span{
+#LogSum span {
   background-color: var(--dark);
   padding: 1rem 2rem;
   margin: 0.25rem;
@@ -14,6 +14,5 @@
   border-radius: 3rem;
   border: 0.25rem solid var(--light);
 }
-#LogSum button{
-
+#LogSum button {
 }

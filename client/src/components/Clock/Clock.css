@@ -1,4 +1,4 @@
-#Clock{
+#Clock {
   height: 100%;
   width: 100%;
   display: flex;
@@ -7,7 +7,7 @@
   align-items: center;
 }
 
-#Clock form{
+#Clock form {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -15,7 +15,7 @@
 }
 
 /* Logo */
-#logo{
+#logo {
   position: absolute;
   top: 1rem;
   left: 1rem;
@@ -27,41 +27,42 @@
 }
 
 /* Clocked Since */
-.clocked-since{
+.clocked-since {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-.clocked-since.out{
+.clocked-since.out {
   opacity: 0;
 }
-.clocked-since span{
+.clocked-since span {
   font-size: 2.5rem;
   border-radius: 3rem;
   font-weight: 700;
   color: var(--light);
 }
-.clocked-time-label{
+.clocked-time-label {
   color: var(--light);
   font-size: 2rem;
 }
 
 /* Clock In/Out Button */
-#clock-in, #clock-out{
+#clock-in,
+#clock-out {
   font-weight: 700;
   font-size: 2rem;
   max-width: 9em;
 }
-#clock-in{
+#clock-in {
   background-color: lightgreen;
 }
-#clock-out{
+#clock-out {
   background-color: salmon;
 }
 
 @media screen and (max-width: 1200px) {
-  #Clock{
+  #Clock {
     height: fit-content;
     width: 100%;
     display: flex;
@@ -69,30 +70,30 @@
     justify-content: center;
     align-items: center;
   }
-  #logo{
+  #logo {
     position: static;
     top: auto;
     left: auto;
   }
 }
 @media screen and (max-width: 600px) {
-  #Clock form{
+  #Clock form {
     padding: 0 1rem;
     width: 100%;
   }
 }
 @media screen and (max-width: 400px) {
-  #logo{
+  #logo {
     font-size: 2rem;
   }
 }
 @media screen and (max-height: 700px) {
-  #Clock{
+  #Clock {
     height: 100%;
     overflow-y: auto;
     justify-content: flex-start;
   }
-  #logo{
+  #logo {
     position: static;
     top: auto;
     left: auto;

@@ -1,7 +1,6 @@
-version: '3.8'
+version: "3.8"
 
 services:
-
   db:
     container_name: tt_pg_container
     image: tt-pg
@@ -28,4 +27,3 @@ services:
     build:
       context: .
       dockerfile: node.Dockerfile
-
