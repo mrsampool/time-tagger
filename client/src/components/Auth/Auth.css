@@ -1,35 +1,36 @@
-#Auth{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+#Auth {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
-#Auth label{
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1rem;
-    color: white;
+#Auth label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  color: white;
 }
-#Auth input{
-    max-width: 20rem;
+#Auth input {
+  max-width: 20rem;
 }
-#Auth button{
-    width: fit-content;
+#Auth button {
+  width: fit-content;
 }
-#Auth h2{
-    font-weight: bold;
+#Auth h2 {
+  font-weight: bold;
 }
-#Auth h2, p{
-    color: lightgreen;
+#Auth h2,
+p {
+  color: lightgreen;
 }
-#Auth #create{
-    margin: 0.25rem;
+#Auth #create {
+  margin: 0.25rem;
 }
-.login-rows{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+.login-rows {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
-.login-rows label{
-    margin: 0.25rem;
+.login-rows label {
+  margin: 0.25rem;
 }
