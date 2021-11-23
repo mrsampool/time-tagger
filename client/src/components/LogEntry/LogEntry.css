@@ -4,41 +4,52 @@
   flex-direction: column;
   /* Spacing */
   padding: 0.5rem 1.5rem;
-  margin: 1rem 1rem;
+  margin: 0.25rem 0.25rem;
   /* Background & Border */
   border-radius: 3rem;
   background-color: var(--dark-blue);
 }
 .log-entry.current {
   background-color: salmon;
-  color: maroon;
+}
+.log-entry.current .data-field{
+  background-color: maroon;
 }
 .log-entry.current span {
-  color: maroon;
+  color: salmon;
 }
 
 .log-entry .datetime-info {
   display: flex;
   width: 100%;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
 }
 
 .data-field {
+  /* display */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 0.5rem 1.5rem;
-  color: var(--light);
+  /* sizing & spacing */
   height: fit-content;
+  margin: 0.25rem;
+  padding: 0.25rem 1rem;
+  /* text */
   font-size: 1.25rem;
   font-weight: 400;
+  color: var(--dark-blue);
+  /* bg & border */
   border-radius: 1rem;
+  background-color: var(--light);
 }
 .data-field span {
   font-weight: 400;
   width: max-content;
+}
+.log-entry.current .data-field.times .out-time{
+  font-weight: bold;
 }
 .log-entry .tags {
   display: flex;
@@ -53,5 +64,21 @@
 @media screen and (max-width: 1200px) {
   .log-entry .datetime-info {
     flex-wrap: wrap;
+  }
+}
+@media screen and (max-width: 600px) {
+  .log-entry .datetime-info {
+    flex-direction: column;
+  }
+  .data-field {
+    flex-direction: row;
+  }
+  .data-field span {
+    margin: 0 1rem;
+  }
+}
+@media screen and (max-width: 400px) {
+  .data-field {
+    flex-direction: column;
   }
 }

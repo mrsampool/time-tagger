@@ -37,7 +37,14 @@ export const Clock = (props) => {
           list="current-tags"
           placeholder="write a tag for your time..."
         />
-        <button>add tag</button>
+        <div id="clock-adjusters">
+          <button>add tag</button>
+          <label id="rate-wrap">
+            $
+            <input type="number" placeholder={50} min={0} />
+            / hr
+          </label>
+        </div>
         <datalist id="current-tags">
           {userTags.size
             ? [...userTags].map((tag) => {
@@ -51,8 +58,10 @@ export const Clock = (props) => {
       </button>
       <div className={`clocked-since ${clockedIn ? "in" : "out"}`}>
         <p className="clocked-time-label">clocked in since:</p>
-        <span id="clocked-time">{intime || "-"}</span>
-        <span id="clocked-dlrs">{currentDlrs || "-"}</span>
+        <div>
+          <span id="clocked-time">{intime || "-"}</span>
+          <span id="clocked-dlrs">{currentDlrs || "-"}</span>
+        </div>
       </div>
     </div>
   );

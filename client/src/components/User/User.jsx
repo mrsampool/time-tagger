@@ -9,7 +9,7 @@ export const User = ({ user, logOut }) => {
   return (
     <div id={"User"}>
       <span>{user.first_name}</span>
-      <button onClick={handleClick}>X</button>
+      <button onClick={handleClick}>logout</button>
     </div>
   );
 };

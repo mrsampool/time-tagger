@@ -1,6 +1,6 @@
 button {
   padding: 1rem;
-  margin: 1rem;
+  margin: 0.5rem;
   font-size: 1.2rem;
   letter-spacing: 0.1em;
   border-radius: 2rem;
@@ -25,5 +25,5 @@ input {
   color: var(--dark-blue);
   font-weight: 400;
   border-radius: 2rem;
-  padding: 0.5rem 1rem;
+  padding: 0.25rem 0.5rem;
 }

@@ -15,10 +15,20 @@ export const LogEntry = (props) => {
         </div>
         <div className="data-field times">
           <span>{entry.intime}</span>
-          <span>{entry.outtime || "CURRENT"}</span>
+          <span className="out-time">{entry.outtime || "CURRENT"}</span>
         </div>
         <div className="data-field numbers">
-          <span>{entry.totaltime}</span>
+          {
+            entry && entry.outtime && entry.totaltime && entry.totaltime.length &&
+            <span>{
+              entry.totaltime
+                .split(' ')
+                .filter((section) => {
+                  return section.indexOf('00h') === -1 && section.indexOf('00m') === -1;
+                })
+                .join(' ')
+            }</span>
+          }
           <span>${entry.rate / 100}/hr</span>
         </div>
         {entry.value !== null ? (

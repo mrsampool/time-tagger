@@ -21,6 +21,9 @@ export const Auth = ({ logIn, createAccount, setUser }) => {
       setMode
     );
   }
+  function handleDemo() {
+    logIn({ email: 'demo', password: 'password' });
+  }
   function handleModeSwitch() {
     setMode(mode === "login" ? "create" : "login");
   }
@@ -75,7 +78,7 @@ export const Auth = ({ logIn, createAccount, setUser }) => {
       )}
       <p>
         Or
-        <button id="create" onClick={handleModeSwitch}>
+        <button id="create" onClick={handleDemo}>
           Try The Demo
         </button>
       </p>

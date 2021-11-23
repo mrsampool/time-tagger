@@ -11,7 +11,6 @@
   align-items: center;
 
   /* spacing */
-  padding: 0.25rem 1rem;
   margin: 0.25rem;
 
   /* font */
@@ -21,7 +20,7 @@
 
   /* background & border */
   background-color: var(--dark);
-  border-radius: 3rem;
+  border-radius: 1rem;
   border: 0.25rem solid var(--light);
 }
 #User button {
@@ -29,4 +28,13 @@
   justify-content: center;
   margin: 0rem;
   padding: 0.1rem 0.5rem;
+  width: 100%;
+  border-radius: 1rem;
+}
+@media screen and (max-width: 600px) {
+  #User{
+    position: static;
+    width: fit-content;
+  }
+
 }
