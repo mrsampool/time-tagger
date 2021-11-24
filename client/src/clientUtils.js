@@ -28,7 +28,7 @@ export const clientUtils = {
       .then(({ data }) => {
         if (data.user) {
           setUser(data.user);
-          if (data.user.rate) {setCurrentRate(data.user.rate); }
+          if (data.user.rate) {setCurrentRate(data.user.rate / 100); }
         }
       })
       .catch((err) => console.log(err));
