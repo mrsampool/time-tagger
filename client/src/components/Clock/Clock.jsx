@@ -1,21 +1,24 @@
 //React
 import React from "react";
 
+// Sub-Components
+import {RateInput} from '../RateInput/RateInput.jsx';
+
 //Stylesheet
 import "./Clock.css";
 import { CurrentTags } from "../CurrentTags/CurrentTags.jsx";
 
-export const Clock = (props) => {
-  const {
+export const Clock = ({
     clockedIn,
     currentClock,
     currentTags,
-    setCurrentClock,
-    setCurrentTags,
-    toggleClock,
-    userTags,
     currentDlrs,
-  } = props;
+    currentRate,
+    setCurrentTags,
+    setCurrentRate,
+    toggleClock,
+    userTags
+  }) => {
   const { intime, rate, tags } = currentClock;
 
   function addTag(e) {
@@ -39,11 +42,7 @@ export const Clock = (props) => {
         />
         <div id="clock-adjusters">
           <button>add tag</button>
-          <label id="rate-wrap">
-            $
-            <input type="number" placeholder={50} min={0} />
-            / hr
-          </label>
+          <RateInput currentRate={currentRate} setCurrentRate={setCurrentRate} />
         </div>
         <datalist id="current-tags">
           {userTags.size

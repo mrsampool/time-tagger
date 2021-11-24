@@ -21,6 +21,7 @@ export const App = (props) => {
   const [currentClock, setCurrentClock] = useState(EmptyClock);
   const [currentTags, setCurrentTags] = useState([]);
   const [currentDlrs, setCurrentDlrs] = useState(0);
+  const [currentRate, setCurrentRate] = useState(50);
 
   const [log, setLog] = useState([]);
   const [userTags, setUserTags] = useState([]);
@@ -93,9 +94,11 @@ export const App = (props) => {
             currentClock={currentClock}
             currentTags={currentTags}
             currentDlrs={currentDlrs}
+            currentRate={currentRate}
             userTags={userTags}
             setCurrentClock={setCurrentClock}
             setCurrentTags={setCurrentTags}
+            setCurrentRate={setCurrentRate}
             toggleClock={toggleClock}
           />
           <Log log={log} currentTags={currentTags} />
