@@ -12,6 +12,7 @@
 
   /* spacing */
   margin: 0.25rem;
+  padding: 0.25rem;
 
   /* font */
   font-size: 1.5rem;
@@ -30,6 +31,7 @@
   padding: 0.1rem 0.5rem;
   width: 100%;
   border-radius: 1rem;
+  background-color: lightgreen;
 }
 @media screen and (max-width: 600px) {
   #User{
