@@ -40,10 +40,10 @@ export const clientUtils = {
     setLog,
     setCurrentClock,
     currentTags,
-    setUserTags,
+    currentRate,
   ) {
     axios
-      .post(`/api/users/${userId}/log`, { tags: currentTags })
+      .post(`/api/users/${userId}/log`, { tags: currentTags, rate: currentRate })
       .then(({ data }) => {
         const newEntry = data;
         newEntry.intimeobj = new Date(newEntry.intimeobj);

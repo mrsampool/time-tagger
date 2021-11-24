@@ -38,7 +38,7 @@ export const App = (props) => {
         setLog,
         setCurrentClock,
         currentTags,
-         setUserTags
+        currentRate
       );
     }
   }

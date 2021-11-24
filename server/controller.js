@@ -21,7 +21,7 @@ module.exports = {
     return new Promise((resolve, reject) => {
       const userId = Number(req.params.userId);
       timelog
-        .clockIn(userId, req.body.rate / 100 || 5000)
+        .clockIn(userId, req.body.rate * 100 || 5000)
         .then((insertId) => {
           inserted = insertId;
           tags.tagLog(userId, insertId, req.body.tags).then((data) => {
