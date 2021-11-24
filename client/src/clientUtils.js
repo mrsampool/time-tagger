@@ -22,12 +22,13 @@ export const clientUtils = {
       .catch((err) => console.log(err));
   },
 
-  fetchUser(setUser) {
+  fetchUser(setUser, setCurrentRate) {
     axios
       .get('/api/users/current')
       .then(({ data }) => {
         if (data.user) {
           setUser(data.user);
+          if (data.user.rate) {setCurrentRate(data.user.rate); }
         }
       })
       .catch((err) => console.log(err));

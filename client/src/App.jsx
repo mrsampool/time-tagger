@@ -66,7 +66,7 @@ export const App = (props) => {
     if (user) {
       fetchLog(user.id, setLog, setClockedIn, setCurrentClock, setUserTags);
     } else {
-      fetchUser(setUser);
+      fetchUser(setUser, setCurrentRate);
     }
   }, [user]);
 

@@ -19,6 +19,7 @@ apiRouter.post(
   '/login',
   passport.authenticate('local', {}),
   (req, res, next) => {
+    delete req.user.password;
     res.send({ user: req.user });
   },
 );

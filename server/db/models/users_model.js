@@ -30,7 +30,18 @@ module.exports = {
       pool
         .query(
           `
-        SELECT * FROM users WHERE email = $1;
+        SELECT 
+        *,
+        (
+          SELECT 
+          rate
+          FROM timelogs
+          WHERE timelogs.user_id=users.id
+          ORDER BY in_time DESC
+          LIMIT 1 
+        )
+        FROM users 
+        WHERE email = $1;
         `,
           [email],
         )

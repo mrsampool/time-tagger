@@ -24,9 +24,9 @@ module.exports = {
                 WHERE log_id=timelogs.id
                 GROUP BY t1.tag_id, t2.tag_name
             ) AS TAGS)
-        FROM timelogs;
-        `,
-        )
+        FROM timelogs
+        WHERE user_id=$1;
+        `, [userId])
         .then(({ rows }) => resolve(rows))
         .catch(reject);
     });
