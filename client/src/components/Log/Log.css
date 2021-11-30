@@ -1,12 +1,11 @@
 #Log {
-  height: 100%;
-  overflow-y: auto;
+  width: 100%;
   background-color: var(--light);
-  min-width: 45rem;
 }
-@media screen and (max-width: 1200px) {
+@media screen and (min-width: 1200px) {
   #Log {
-    width: 100%;
-    min-width: auto;
+    height: 100%;
+    overflow-y: auto;
+    min-width: 45rem;
   }
 }
