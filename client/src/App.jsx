@@ -50,7 +50,7 @@ export const App = (props) => {
           setUser(data.user);
         }
       })
-      .catch(() => errorCb());
+      .catch(() => { if (errorCb) { errorCb() }});
     ;
   }
 

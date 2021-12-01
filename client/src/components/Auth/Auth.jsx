@@ -66,7 +66,7 @@ export const Auth = ({ logIn, createAccount, setUser }) => {
       });
   }
   function handleDemo() {
-    logIn({ email: 'demo', password: 'password' });
+    logIn({ email: 'demo', password: 'demodemo' });
   }
   function handleModeSwitch() {
     setMode(mode === "login" ? "create" : "login");

@@ -11,7 +11,6 @@ module.exports = () => {
         passwordField: 'password',
       },
       (email, password, done) => {
-        console.log('auth...');
         users
           .find(email)
           .then((user) => {
