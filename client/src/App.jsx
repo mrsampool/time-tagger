@@ -43,17 +43,15 @@ export const App = (props) => {
     }
   }
 
-  function logIn(creds, failureCb) {
+  function logIn(creds, errorCb) {
     axios.post("/api/login", creds)
-      .then((res) => {
-        console.log(res.statusCode);
-        if (res.data.user) {
-          setUser(res.data.user);
+      .then(({data}) => {
+        if (data.user) {
+          setUser(data.user);
         }
       })
-      .catch(() => {
-        failureCb();
-      });
+      .catch(() => errorCb());
+    ;
   }
 
   function logOut() {

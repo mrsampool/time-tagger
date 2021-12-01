@@ -39,9 +39,15 @@ export const Auth = ({ logIn, createAccount, setUser }) => {
   const [warn, setWarn] = useState('');
   function handleSubmit(e) {
     e.preventDefault();
-    const email = document.getElementById("input-email").value;
-    const password = document.getElementById("input-pw").value;
-    logIn({ email, password }, ()=>{setWarn('Login attempt unsuccessful')});
+    const creds = {
+      email: document.getElementById("input-email").value,
+      password: document.getElementById("input-pw").value
+    };
+    logInSchema.validate(creds)
+      .then(validated => {
+        logIn(validated, ()=>{setWarn('Login attempt unsuccessful')})
+      })
+      .catch((err) => setWarn(err.message));
   }
   function handleCreate(e) {
     e.preventDefault();

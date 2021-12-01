@@ -22,9 +22,6 @@ apiRouter.post(
     delete req.user.password;
     res.send({ user: req.user });
   },
-  (req, res) => {
-    res.sendStatus(401);
-  },
 );
 apiRouter.get('/logout', controller.logOut);
 // TODO: apiRouter.put('/users/:userId/log/:logId', handler);
