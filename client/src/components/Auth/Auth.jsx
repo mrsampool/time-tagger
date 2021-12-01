@@ -7,7 +7,8 @@ const logInSchema = yup.object().shape({
   email: yup
     .string()
     .email('Please enter a valid email address')
-    .required('Email address is required'),
+    .required('Email address is required')
+    .max(70, 'Email must have less than 71 characters'),
   password: yup
     .string()
     .required('Password is required')
@@ -25,6 +26,7 @@ const createUserSchema = yup.object().shape({
     .max(50),
   email: yup
     .string()
+    .email('Please enter a valid email address')
     .required('Email is required')
     .max(70, 'Email must have less than 71 characters'),
   password: yup
