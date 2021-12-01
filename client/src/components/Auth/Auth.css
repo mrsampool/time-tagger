@@ -4,6 +4,11 @@
   align-items: center;
   justify-content: center;
 }
+#Auth form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 #Auth label {
   display: flex;
   flex-direction: column;
@@ -44,6 +49,7 @@
   padding: 1rem;
 }
 #Auth .login-fail{
+  width: fit-content;
   background-color: salmon;
   font-weight: bold;
   padding: 0.5rem;

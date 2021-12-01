@@ -36,23 +36,26 @@ const createUserSchema = yup.object().shape({
 
 export const Auth = ({ logIn, createAccount, setUser }) => {
   const [mode, setMode] = useState("login");
-  const [warn, setWarn] = useState(false);
+  const [warn, setWarn] = useState('');
   function handleSubmit(e) {
     e.preventDefault();
     const email = document.getElementById("input-email").value;
     const password = document.getElementById("input-pw").value;
-    logIn({ email, password }, ()=>{setWarn(true)});
+    logIn({ email, password }, ()=>{setWarn('Login attempt unsuccessful')});
   }
   function handleCreate(e) {
     e.preventDefault();
-    const firstName = document.getElementById("input-fname").value;
-    const lastName = document.getElementById("input-lname").value;
-    const email = document.getElementById("input-email").value;
-    const password = document.getElementById("input-pw").value;
-    createAccount(
-      { userInfo: { firstName, lastName, email, password } },
-      setMode
-    );
+    const userInfo = {
+      firstName: document.getElementById("input-fname").value,
+      lastName: document.getElementById("input-lname").value,
+      email: document.getElementById("input-email").value,
+      password: document.getElementById("input-pw").value,
+    };
+    createUserSchema.validate(userInfo)
+      .then(validated => createAccount({userInfo: validated}, setMode))
+      .catch(err => {
+        setWarn(err.message);
+      });
   }
   function handleDemo() {
     logIn({ email: 'demo', password: 'password' });
@@ -98,9 +101,9 @@ export const Auth = ({ logIn, createAccount, setUser }) => {
               </button>
             )
         }
-        <p className={`login-fail ${warn}`}>
-          Login unsuccessful
-          <button type="button" onClick={()=>{setWarn(false)}}>OK</button>
+        <p className={`login-fail ${!!warn}`}>
+          {warn}
+          <button type="button" onClick={()=>{setWarn('')}}>OK</button>
         </p>
       </form>
       <div id="other-options">
