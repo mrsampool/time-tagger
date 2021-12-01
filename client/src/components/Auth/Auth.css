@@ -19,9 +19,11 @@
 #Auth h2 {
   font-weight: bold;
 }
-#Auth h2,
-p {
+#Auth h2 {
   color: lightgreen;
+}
+#Auth p {
+  color: white;
 }
 #Auth #create {
   margin: 0.25rem;
@@ -33,4 +35,22 @@ p {
 }
 .login-rows label {
   margin: 0.25rem;
+}
+#other-options {
+  margin-top: 1rem;
+  background-color: var(--dark);
+  border: 0.25rem solid var(--light);
+  border-radius: 1rem;
+  padding: 1rem;
+}
+#Auth .login-fail{
+  background-color: salmon;
+  font-weight: bold;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  opacity: 0;
+  color: maroon;
+}
+#Auth .login-fail.true{
+  opacity: 1;
 }

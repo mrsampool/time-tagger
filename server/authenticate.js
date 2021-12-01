@@ -20,8 +20,14 @@ module.exports = () => {
             }
             bcrypt
               .compare(password, user.password)
-              .then(() => done(null, user))
-              .catch((err) => done(null, false));
+              .then((result) => {
+                if (result) {
+                  done(null, user);
+                } else {
+                  done(null, false);
+                }
+              })
+              .catch(() => done(null, false));
           })
           .catch((err) => done(err));
       },

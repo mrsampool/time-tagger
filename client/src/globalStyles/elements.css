@@ -5,7 +5,7 @@ button {
   letter-spacing: 0.1em;
   border-radius: 2rem;
   border: 0;
-  background-color: var(--light);
+  background-color: lightgreen;
   color: var(--dark);
   font-weight: 700;
 }

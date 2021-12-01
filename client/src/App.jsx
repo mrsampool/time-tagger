@@ -43,12 +43,17 @@ export const App = (props) => {
     }
   }
 
-  function logIn(creds) {
-    axios.post("/api/login", creds).then(({ data }) => {
-      if (data.user) {
-        setUser(data.user);
-      }
-    });
+  function logIn(creds, failureCb) {
+    axios.post("/api/login", creds)
+      .then((res) => {
+        console.log(res.statusCode);
+        if (res.data.user) {
+          setUser(res.data.user);
+        }
+      })
+      .catch(() => {
+        failureCb();
+      });
   }
 
   function logOut() {
@@ -73,7 +78,6 @@ export const App = (props) => {
   useEffect(() => {
     const interval = setInterval(() => {
       if (currentClock.intimeobj) {
-        console.log(new Date() - currentClock.intimeobj);
         setCurrentDlrs(
           `$${(((new Date() - currentClock.intimeobj) / 3600000) * 50).toFixed(
             2

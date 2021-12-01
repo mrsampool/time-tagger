@@ -18,9 +18,12 @@ apiRouter.get('/users/current', (req, res, next) => {
 apiRouter.post(
   '/login',
   passport.authenticate('local', {}),
-  (req, res, next) => {
+  (req, res) => {
     delete req.user.password;
     res.send({ user: req.user });
+  },
+  (req, res) => {
+    res.sendStatus(401);
   },
 );
 apiRouter.get('/logout', controller.logOut);
