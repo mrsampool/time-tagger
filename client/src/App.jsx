@@ -59,8 +59,8 @@ export const App = (props) => {
     axios
       .get(`/api/logout`)
       .then((data) => {
-        console.log(data);
         setUser(null);
+        setCurrentTags([]);
       })
       .catch((err) => console.log(err));
   }
@@ -98,6 +98,7 @@ export const App = (props) => {
             currentDlrs={currentDlrs}
             currentRate={currentRate}
             userTags={userTags}
+            user={user}
             setCurrentClock={setCurrentClock}
             setCurrentTags={setCurrentTags}
             setCurrentRate={setCurrentRate}
