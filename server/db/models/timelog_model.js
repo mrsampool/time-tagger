@@ -100,9 +100,9 @@ module.exports = {
     });
   },
 
-  editEntry: function editLogEntry(logInfo) {
+  editEntry: function editLogEntry(id, logInfo) {
     const {
-      intime, outtime, rate, id,
+      intime, outtime, rate,
     } = logInfo;
     return new Promise((resolve, reject) => {
       pool

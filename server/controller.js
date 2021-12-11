@@ -51,8 +51,7 @@ module.exports = {
   },
 
   editEntry: function editLogEntry(req, res) {
-    timelog
-      .editEntry(req.body.entry)
+    timelog.editEntry(req.params.logId, req.body.entry)
       .then(({ entry, user }) => {
         tags.tagLog(user, entry, req.body.entry.tags)
           .then(() => {
