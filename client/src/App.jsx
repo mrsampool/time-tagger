@@ -15,6 +15,7 @@ const { fetchLog, fetchUser, clockIn, clockOut, EmptyClock, createAccount } =
 
 // Style Sheet
 import "./App.css";
+import EditLog from "./components/EditLog/EditLog.jsx";
 
 export const App = (props) => {
   const [clockedIn, setClockedIn] = useState(false);
@@ -22,6 +23,13 @@ export const App = (props) => {
   const [currentTags, setCurrentTags] = useState([]);
   const [currentDlrs, setCurrentDlrs] = useState(0);
   const [currentRate, setCurrentRate] = useState(50);
+  const [editLogEntry, setEditLogEntry] = useState({
+    id: 1,
+    indate: 'Fri 12.10.21',
+    intime: '1:20 pm',
+    tags: [],
+    rate: 5000,
+  });
 
   const [log, setLog] = useState([]);
   const [userTags, setUserTags] = useState([]);
@@ -90,6 +98,16 @@ export const App = (props) => {
     <div id="App">
       {user ? (
         <React.Fragment>
+          {
+            editLogEntry && editLogEntry.id &&
+            <EditLog
+              logEntry={editLogEntry}
+              userTags={userTags}
+              user={user}
+              setEntry={setEditLogEntry}
+            />
+          }
+
           <User user={user} logOut={logOut} />
           <Clock
             clockedIn={clockedIn}

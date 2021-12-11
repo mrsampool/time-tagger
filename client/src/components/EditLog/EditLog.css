@@ -1,0 +1,43 @@
+#edit-log-wrap{
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+    background-color: hsla(0,0%,0%, 0.5);
+}
+#edit-log{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--dark);
+    border-radius: 1rem;
+    padding: 1rem;
+}
+#edit-log h2{
+    font-weight: bold;
+    color: var(--light);
+}
+#edit-log label{
+    margin: 0.25rem;
+    color: var(--light);
+}
+#edit-log input[type=datetime-local]{
+    width: fit-content;
+    margin: 0.25rem;
+    font-size: 1rem;
+    font-weight: 200;
+}
+#edit-log #tagger{
+    padding: 0.25rem;
+    border-top: 0.25rem solid var(--light);
+    border-bottom: 0.25rem solid var(--light);
+    margin: 1rem 0;
+}
+.red{
+    background-color: salmon;
+}
