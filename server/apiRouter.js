@@ -7,6 +7,7 @@ const controller = require('./controller');
 apiRouter.get('/users/:userId/log', controller.getUserLog);
 apiRouter.post('/users/:userId/log', controller.clockIn);
 apiRouter.put('/users/:userId/log', controller.clockOut);
+apiRouter.put('/users/:userId/log/:logId', controller.editEntry);
 apiRouter.post('/users', controller.createUser);
 apiRouter.get('/users/current', (req, res, next) => {
   if (req.user) {

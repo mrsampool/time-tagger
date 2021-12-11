@@ -49,6 +49,15 @@ module.exports = {
     });
   },
 
+  editEntry: function editLogEntry(req, res, next) {
+    return new Promise((resolve, reject) => {
+      timelog
+        .editEntry(req.body.entry)
+        .then((clockedOut) => res.status(200).send(clockedOut))
+        .catch((err) => console.log(err));
+    });
+  },
+
   createUser: function createUser(req, res, next) {
     console.log('create user');
     return new Promise((resolve, reject) => {

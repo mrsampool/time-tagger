@@ -99,6 +99,30 @@ module.exports = {
     });
   },
 
+  editEntry: function editLogEntry(logInfo) {
+    /*
+    return new Promise((resolve, reject) => {
+      pool
+        .query(
+          `
+        UPDATE timelogs
+        SET out_time=CURRENT_TIMESTAMP,
+            total_time=CURRENT_TIMESTAMP-in_time,
+            value=(EXTRACT(epoch FROM CURRENT_TIMESTAMP - in_time) / 3600 ) * rate
+        WHERE user_id=$1
+          AND out_time IS NULL
+          RETURNING *;
+        `,
+          [userId],
+        )
+        .then(({ rows }) => {
+          resolve(rows[0]);
+        })
+        .catch(reject);
+    });
+     */
+  },
+
   deleteById: function deleteTimelogById(id) {
     return new Promise((resolve, reject) => {
       pool

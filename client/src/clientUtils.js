@@ -72,6 +72,10 @@ export const clientUtils = {
       .catch((err) => console.log(err));
   },
 
+  editLogEntry(){
+
+  },
+
   createAccount(userInfo, setMode) {
     axios
       .post('api/users', userInfo)
