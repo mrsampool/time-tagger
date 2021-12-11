@@ -2,6 +2,7 @@ const passport = require('passport');
 const timelog = require('./db/models/timelog_model');
 const tags = require('./db/models/logtags_model');
 const users = require('./db/models/users_model');
+const {reject} = require("bcrypt/promises");
 
 module.exports = {
   getUserLog: function getLogByUser(req, res, next) {
@@ -49,13 +50,26 @@ module.exports = {
     });
   },
 
-  editEntry: function editLogEntry(req, res, next) {
+  editEntry: function editLogEntry(req, res) {
+    timelog
+      .editEntry(req.body.entry)
+      .then(({ entry, user }) => {
+        tags.tagLog(user, entry, req.body.entry.tags)
+          .then(() => {
+            timelog.queryByLogId(entry)
+              .then((data) => {
+                console.log(data);
+                res.status(201).send(data[0]);
+              })
+              .catch((err) => console.log(err));
+          })
+          .catch((err) => console.log(err));
+      })
+      .catch((err) => console.log(err));
+    /*
     return new Promise((resolve, reject) => {
-      timelog
-        .editEntry(req.body.entry)
-        .then((clockedOut) => res.status(200).send(clockedOut))
-        .catch((err) => console.log(err));
     });
+     */
   },
 
   createUser: function createUser(req, res, next) {

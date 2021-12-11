@@ -1,4 +1,5 @@
 const { pool } = require('../index');
+// const tags = require("./db/models/logtags_model");
 
 module.exports = {
   queryAllByUser: function queryAllLogsByUser(userId) {
@@ -100,27 +101,36 @@ module.exports = {
   },
 
   editEntry: function editLogEntry(logInfo) {
-    /*
+    const {
+      intime, outtime, rate, id,
+    } = logInfo;
     return new Promise((resolve, reject) => {
       pool
         .query(
           `
-        UPDATE timelogs
-        SET out_time=CURRENT_TIMESTAMP,
-            total_time=CURRENT_TIMESTAMP-in_time,
-            value=(EXTRACT(epoch FROM CURRENT_TIMESTAMP - in_time) / 3600 ) * rate
-        WHERE user_id=$1
-          AND out_time IS NULL
-          RETURNING *;
+          UPDATE timelogs
+          SET
+            in_time = TO_TIMESTAMP($1, 'YYYY-MM-DD HH:MI:SS'),
+            out_time = TO_TIMESTAMP($2, 'YYYY-MM-DD HH:MI:SS'),
+            rate = $3::INTEGER,
+            total_time = 
+              TO_TIMESTAMP($2, 'YYYY-MM-DD HH:MI:SS') 
+              - TO_TIMESTAMP($1, 'YYYY-MM-DD HH:MI:SS'),
+            value = 
+              (EXTRACT(epoch FROM (
+                TO_TIMESTAMP($2, 'YYYY-MM-DD HH:MI:SS') 
+                - TO_TIMESTAMP($1, 'YYYY-MM-DD HH:MI:SS')
+              )) / 3600) * $3
+          WHERE id = $4
+          RETURNING 
+            id AS entry, 
+            user_id AS user;
         `,
-          [userId],
+          [intime, outtime, rate, id],
         )
-        .then(({ rows }) => {
-          resolve(rows[0]);
-        })
+        .then(({ rows }) => resolve(rows[0]))
         .catch(reject);
     });
-     */
   },
 
   deleteById: function deleteTimelogById(id) {
