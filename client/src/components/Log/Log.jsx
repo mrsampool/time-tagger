@@ -9,8 +9,7 @@ import { LogSum } from "../LogSum/LogSum";
 import "./Log.css";
 
 export const Log = (props) => {
-  let { log, currentTags } = props;
-
+  let { log, currentTags, editEntry } = props;
   let [filteredLog, setFilteredLog] = useState(log);
 
   useEffect(() => {
@@ -31,7 +30,7 @@ export const Log = (props) => {
     <div id="Log">
       <LogSum log={filteredLog} />
       {filteredLog.map((entry) => {
-        return <LogEntry entry={entry} key={`log-entry-${entry.id}`} />;
+        return <LogEntry entry={entry} key={`log-entry-${entry.id}`} editEntry={editEntry} />;
       })}
     </div>
   );

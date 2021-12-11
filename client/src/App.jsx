@@ -122,7 +122,7 @@ export const App = (props) => {
             setCurrentRate={setCurrentRate}
             toggleClock={toggleClock}
           />
-          <Log log={log} currentTags={currentTags} />
+          <Log log={log} currentTags={currentTags} editEntry={setEditLogEntry} />
         </React.Fragment>
       ) : (
         <Auth logIn={logIn} createAccount={createAccount} setUser={setUser} />

@@ -5,7 +5,7 @@ import React from "react";
 import "./LogEntry.css";
 
 export const LogEntry = (props) => {
-  const { entry } = props;
+  const { entry, editEntry } = props;
   return (
     <div className={`log-entry ${!entry.outtime ? "current" : ""}`}>
       <div className="datetime-info">
@@ -36,16 +36,19 @@ export const LogEntry = (props) => {
             <span>{entry.value !== null ? `$${entry.value / 100}` : ""}</span>
           </div>
         ) : null}
+        <div>
+          <button onClick={() => { editEntry(entry); }}>EDIT</button>
+        </div>
       </div>
       <div className="tags">
         {entry.tags.length
           ? entry.tags.map((tag, index) => {
-              return (
+            return (
                 <span className="tag" key={`logentrytag${tag}${index}`}>
                   {tag}
                 </span>
-              );
-            })
+            );
+          })
           : null}
       </div>
     </div>
