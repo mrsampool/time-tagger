@@ -8,6 +8,9 @@ import { Clock } from "./components/Clock/Clock.jsx";
 import { Auth } from "./components/Auth/Auth.jsx";
 import { User } from "./components/User/User.jsx";
 
+// Context
+import AppContext from "./AppContext.jsx";
+
 // Utilities
 import { clientUtils } from "./clientUtils";
 const { fetchLog, fetchUser, clockIn, clockOut, EmptyClock, createAccount } =
@@ -96,37 +99,39 @@ export const App = (props) => {
 
   return (
     <div id="App">
-      {user ? (
-        <React.Fragment>
-          {
-            editLogEntry && editLogEntry.id &&
-            <EditLog
-              logEntry={editLogEntry}
+      <AppContext.Provider value={{ user, setUser, log, setLog, setEditLogEntry }}>
+        {user ? (
+          <React.Fragment>
+            {
+              editLogEntry && editLogEntry.id &&
+              <EditLog
+                logEntry={editLogEntry}
+                userTags={userTags}
+                user={user}
+                setEntry={setEditLogEntry}
+              />
+            }
+
+            <User user={user} logOut={logOut} />
+            <Clock
+              clockedIn={clockedIn}
+              currentClock={currentClock}
+              currentTags={currentTags}
+              currentDlrs={currentDlrs}
+              currentRate={currentRate}
               userTags={userTags}
               user={user}
-              setEntry={setEditLogEntry}
+              setCurrentClock={setCurrentClock}
+              setCurrentTags={setCurrentTags}
+              setCurrentRate={setCurrentRate}
+              toggleClock={toggleClock}
             />
-          }
-
-          <User user={user} logOut={logOut} />
-          <Clock
-            clockedIn={clockedIn}
-            currentClock={currentClock}
-            currentTags={currentTags}
-            currentDlrs={currentDlrs}
-            currentRate={currentRate}
-            userTags={userTags}
-            user={user}
-            setCurrentClock={setCurrentClock}
-            setCurrentTags={setCurrentTags}
-            setCurrentRate={setCurrentRate}
-            toggleClock={toggleClock}
-          />
-          <Log log={log} currentTags={currentTags} editEntry={setEditLogEntry} />
-        </React.Fragment>
-      ) : (
-        <Auth logIn={logIn} createAccount={createAccount} setUser={setUser} />
-      )}
+            <Log log={log} currentTags={currentTags} editEntry={setEditLogEntry} />
+          </React.Fragment>
+        ) : (
+          <Auth logIn={logIn} createAccount={createAccount} setUser={setUser} />
+        )}
+      </AppContext.Provider>
     </div>
   );
 };

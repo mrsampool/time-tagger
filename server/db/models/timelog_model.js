@@ -110,16 +110,16 @@ module.exports = {
           `
           UPDATE timelogs
           SET
-            in_time = TO_TIMESTAMP($1, 'YYYY-MM-DD HH:MI:SS'),
-            out_time = TO_TIMESTAMP($2, 'YYYY-MM-DD HH:MI:SS'),
+            in_time = TO_TIMESTAMP($1, 'YYYY-MM-DD HH24:MI:SS'),
+            out_time = TO_TIMESTAMP($2, 'YYYY-MM-DD HH24:MI:SS'),
             rate = $3::INTEGER,
             total_time = 
-              TO_TIMESTAMP($2, 'YYYY-MM-DD HH:MI:SS') 
-              - TO_TIMESTAMP($1, 'YYYY-MM-DD HH:MI:SS'),
+              TO_TIMESTAMP($2, 'YYYY-MM-DD HH24:MI:SS') 
+              - TO_TIMESTAMP($1, 'YYYY-MM-DD HH24:MI:SS'),
             value = 
               (EXTRACT(epoch FROM (
-                TO_TIMESTAMP($2, 'YYYY-MM-DD HH:MI:SS') 
-                - TO_TIMESTAMP($1, 'YYYY-MM-DD HH:MI:SS')
+                TO_TIMESTAMP($2, 'YYYY-MM-DD HH24:MI:SS') 
+                - TO_TIMESTAMP($1, 'YYYY-MM-DD HH24:MI:SS')
               )) / 3600) * $3
           WHERE id = $4
           RETURNING 

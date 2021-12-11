@@ -1,9 +1,21 @@
-import React, {useState} from "react";
+// Libraries
+import React, {useState, useContext} from "react";
 
-import './EditLog.css';
+// Sub-Components
 import Tagger from "../Tagger/Tagger.jsx";
 
+// Utils / Context
+import {clientUtils} from "../../clientUtils";
+import AppContext from "../../AppContext.jsx";
+
+// Stylesheet
+import './EditLog.css';
+
 const EditLog = ({ logEntry, userTags, user, setEntry }) =>{
+  const { log, setLog, setEditLogEntry } = useContext(AppContext);
+  const { tags, rate, indate, outdate, intime, outtime } = logEntry;
+  const [newTags, setNewTags] = useState(tags);
+  const [newRate, setNewRate] = useState(rate);
   function parseDateTime(date,time) {
     let dateParts = date.split(' ');
     dateParts = dateParts[1].split('.');
@@ -20,24 +32,32 @@ const EditLog = ({ logEntry, userTags, user, setEntry }) =>{
     const minute = timeParts[1];
     return `20${year}-${month}-${day}T${hour}:${minute}`;
   }
+  function handleSubmit(e) {
+    e.preventDefault();
+    const submission = {
+      intime: document.getElementById('input-intime').value.replace('T', ' '),
+      outtime: document.getElementById('input-outtime').value.replace('T', ' '),
+      rate: 10,
+    };
+    console.log(submission);
+    clientUtils.editLogEntry(user.id, logEntry.id, submission, log, setLog, setEditLogEntry);
+  }
   function close(){
     setEntry({});
   }
-  const { tags, rate, indate, outdate, intime, outtime } = logEntry;
-  const [newTags, setNewTags] = useState(tags);
-  const [newRate, setNewRate] = useState(rate);
 
   return(
     <div id="edit-log-wrap">
-      <form id="edit-log">
+      <div id="edit-log">
         <h2>Edit Log Entry</h2>
         <label>
           Start
-          <input type="datetime-local" defaultValue={parseDateTime(indate, intime)} />
+          <input id="input-intime" type="datetime-local" defaultValue={parseDateTime(indate, intime)} />
         </label>
         <label>
           End
           <input
+            id="input-outtime"
             type="datetime-local"
             defaultValue={
               outdate && outtime
@@ -55,9 +75,9 @@ const EditLog = ({ logEntry, userTags, user, setEntry }) =>{
           inputId="edit-add-tags"
           user={user}
         />
-        <button type="button">Save Changes</button>
+        <button type="button" onClick={handleSubmit}>Save Changes</button>
         <button type="button" className="red" onClick={close}>Cancel</button>
-      </form>
+      </div>
     </div>
   );
 };

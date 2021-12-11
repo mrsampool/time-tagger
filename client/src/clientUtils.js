@@ -72,8 +72,17 @@ export const clientUtils = {
       .catch((err) => console.log(err));
   },
 
-  editLogEntry(){
-
+  editLogEntry(userId, logId, entry, log, setLog, setEditLogEntry){
+    axios
+      .put(`/api/users/${userId}/log/${logId}`, { entry })
+      .then(({data}) => {
+        console.log(data);
+        let newLog = log;
+        newLog[log.findIndex(entry => entry.id === logId)] = data;
+        setLog(newLog);
+        setEditLogEntry({});
+      })
+      .catch((err) => console.log(err));
   },
 
   createAccount(userInfo, setMode) {
