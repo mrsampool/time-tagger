@@ -62,22 +62,6 @@ const EditLog = ({ logEntry, userTags, user, setEntry, setCurrentClock }) =>{
             </label>
           )
         }
-        {
-          /*
-          <label>
-            End
-            <input
-              id="input-outtime"
-              type="datetime-local"
-              defaultValue={
-                outdate && outtime
-                  ? parseDateTime(outdate, outtime)
-                  : parseDateTime(indate, intime)
-              }
-            />
-          </label>
-           */
-        }
         <Tagger
           currentTags={newTags}
           tagSetter={setNewTags}

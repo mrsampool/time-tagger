@@ -2,6 +2,8 @@ import React from 'react';
 import { CurrentTags } from "../CurrentTags/CurrentTags.jsx";
 import { RateInput } from "../RateInput/RateInput.jsx";
 
+import './Tagger.css';
+
 const Tagger = (
   {
     currentTags,

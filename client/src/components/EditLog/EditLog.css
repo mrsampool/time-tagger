@@ -25,10 +25,15 @@
     color: var(--light);
 }
 #edit-log label{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
     margin: 0.25rem;
     color: var(--light);
 }
-#edit-log input[type=datetime-local]{
+#edit-log input[type=time], #edit-log input[type=date]{
     width: fit-content;
     margin: 0.25rem;
     font-size: 1rem;

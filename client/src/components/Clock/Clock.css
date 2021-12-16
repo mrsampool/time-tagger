@@ -65,26 +65,6 @@
   align-items: center;
   justify-content: space-between;
 }
-#rate-wrap{
-  /* Display */
-  display: flex;
-  align-items: center;
-  /* Spacing & Sizing */
-  padding: 0.75rem;
-  height: fit-content;
-  /* Background & Border */
-  background-color: var(--light);
-  border-radius: 3rem;
-  /* text */
-  color: var(--dark);
-  font-weight: normal;
-}
-#rate-wrap input{
-  width: 5rem;
-  text-align: center;
-  margin: 0 0.25rem;
-  padding: 0;
-}
 
 @media screen and (max-width: 1200px) {
   #Clock {
