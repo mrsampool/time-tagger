@@ -11,7 +11,6 @@ import LogEntryTags from "../LogEntryTags/LogEntryTags.jsx";
 
 export const LogEntry = (props) => {
   const { entry, editEntry } = props;
-  console.log(new Date(entry.intimeobj));
   return (
     <div className={`log-entry ${!entry.outtime ? "current" : ""}`}>
       <div className="datetime-info">
@@ -19,11 +18,7 @@ export const LogEntry = (props) => {
         <LogEntryTimes intimeObj={entry.intimeobj} outtimeObj={entry.outtimeobj} />
         <LogEntryNums entry={entry} />
         <LogEntryValue value={entry.value} />
-        {/*
-          <div>
-            <button onClick={() => { editEntry(entry); }}>EDIT</button>
-          </div>
-        */}
+        <button onClick={() => { editEntry(entry); }}>EDIT</button>
       </div>
       <LogEntryTags tags={entry.tags} />
     </div>

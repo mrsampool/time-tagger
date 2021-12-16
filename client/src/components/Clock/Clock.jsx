@@ -44,7 +44,7 @@ export var Clock = function ({
         <div>
           <span id="clocked-time">{
             intimeobj
-            ? intimeobj.toLocaleTimeString()
+            ? new Date(intimeobj).toLocaleTimeString()
             : '-'
           }</span>
           <span id="clocked-dlrs">{currentDlrs || '-'}</span>

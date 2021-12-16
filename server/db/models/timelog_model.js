@@ -47,6 +47,7 @@ module.exports = {
             to_char( out_time, 'HH:MI am' ) AS outTime,
             to_char( total_time, 'HH24h MIm SSs' ) AS totalTime,
             in_time AS inTimeObj,
+            out_time AS outTimeObj,
             rate, 
             value, 
             (SELECT array(
@@ -112,16 +113,11 @@ module.exports = {
           UPDATE timelogs
           SET
             in_time = $1::timestamptz,
-            out_time = TO_TIMESTAMP($2, 'YYYY-MM-DD HH24:MI:SS'),
+            out_time = $2::timestamptz,
             rate = $3::INTEGER,
             total_time = 
-              TO_TIMESTAMP($2, 'YYYY-MM-DD HH24:MI:SS') 
-              - TO_TIMESTAMP($1, 'YYYY-MM-DD HH24:MI:SS'),
-            value = 
-              (EXTRACT(epoch FROM (
-                TO_TIMESTAMP($2, 'YYYY-MM-DD HH24:MI:SS') 
-                - TO_TIMESTAMP($1, 'YYYY-MM-DD HH24:MI:SS')
-              )) / 3600) * $3
+              $2::timestamptz - $1::timestamptz,
+            value = (EXTRACT(epoch FROM ($2::timestamptz - $1::timestamptz)) / 3600) * $3
           WHERE id = $4
           RETURNING 
             id AS entry, 

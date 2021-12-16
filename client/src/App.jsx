@@ -90,7 +90,7 @@ export const App = (props) => {
     const interval = setInterval(() => {
       if (currentClock.intimeobj) {
         setCurrentDlrs(
-          `$${(((new Date() - currentClock.intimeobj) / 3600000) * 50).toFixed(
+          `$${(((new Date() - new Date(currentClock.intimeobj)) / 3600000) * 50).toFixed(
             2
           )}`
         );
@@ -111,6 +111,7 @@ export const App = (props) => {
                 userTags={userTags}
                 user={user}
                 setEntry={setEditLogEntry}
+                setCurrentClock={setCurrentClock}
               />
             }
 
@@ -128,7 +129,11 @@ export const App = (props) => {
               setCurrentRate={setCurrentRate}
               toggleClock={toggleClock}
             />
-            <Log log={log} currentTags={currentTags} editEntry={setEditLogEntry} />
+            <Log
+              log={log}
+              currentTags={currentTags}
+              editEntry={setEditLogEntry}
+            />
           </React.Fragment>
         ) : (
           <Auth logIn={logIn} createAccount={createAccount} setUser={setUser} />

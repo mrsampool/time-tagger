@@ -72,7 +72,7 @@ export const clientUtils = {
       .catch((err) => console.log(err));
   },
 
-  editLogEntry(userId, logId, entry, log, setLog, setEditLogEntry){
+  editLogEntry(userId, logId, entry, log, setLog, setEditLogEntry, setCurrentClock){
     axios
       .put(`/api/users/${userId}/log/${logId}`, { entry })
       .then(({data}) => {
@@ -80,6 +80,9 @@ export const clientUtils = {
         let newLog = log;
         newLog[log.findIndex(entry => entry.id === logId)] = data;
         setLog(newLog);
+        if (!data.outtimeobj){
+          setCurrentClock(data);
+        }
         setEditLogEntry({});
       })
       .catch((err) => console.log(err));
@@ -101,6 +104,55 @@ export const clientUtils = {
       .get('/api/logout')
       .then((data) => console.log(data))
       .catch((err) => console.log(err));
+  },
+
+  pad: function pad(num){
+    return num.toString().length < 2
+      ? `0${num}`
+      : `${num}`
+  },
+
+  parseDate: function parseDate(date) {
+    let dateParts = date.split(' ');
+    dateParts = dateParts[1].split('.');
+    const year = dateParts[2];
+    const month = clientUtils.pad(dateParts[0]);
+    const day = clientUtils.pad(dateParts[1]);
+    const compiled = `20${year}-${month}-${day}`;
+    return compiled;
+  },
+
+  parseTime: function parseTime(time) {
+    let timeParts = time.split(' ');
+    const ampm = timeParts[1];
+    timeParts = timeParts[0].split(':');
+    let hour = Number(timeParts[0]);
+    if (ampm === 'pm') {
+      hour += 12;
+    }
+    hour = clientUtils.pad(hour);
+    const minute = clientUtils.pad(timeParts[1]);
+    const compiled = `${hour}:${minute}`;
+    return compiled;
+  },
+
+  compileDTstring: function compileDateTimeString(dateString, timeString){
+    let dtObj = new Date(`${dateString} ${timeString}`);
+    return `${
+      dtObj.getFullYear()
+    }-${
+      clientUtils.pad(dtObj.getMonth() + 1)
+    }-${
+      clientUtils.pad(dtObj.getDate())
+    } ${
+      clientUtils.pad(dtObj.getHours())
+    }:${
+      clientUtils.pad(dtObj.getMinutes())
+    }:${
+      clientUtils.pad(dtObj.getSeconds())
+    } ${
+      -(dtObj.getTimezoneOffset() / 60)
+    }:00`
   },
 
   EmptyClock: {

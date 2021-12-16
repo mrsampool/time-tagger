@@ -6,44 +6,37 @@ import Tagger from "../Tagger/Tagger.jsx";
 
 // Utils / Context
 import {clientUtils} from "../../clientUtils";
+const {pad, parseDate, parseTime, editLogEntry, compileDTstring} = clientUtils;
 import AppContext from "../../AppContext.jsx";
 
 // Stylesheet
 import './EditLog.css';
 
-const EditLog = ({ logEntry, userTags, user, setEntry }) =>{
+const EditLog = ({ logEntry, userTags, user, setEntry, setCurrentClock }) =>{
   const { log, setLog, setEditLogEntry } = useContext(AppContext);
   const { tags, rate, indate, outdate, intime, outtime } = logEntry;
   const [newTags, setNewTags] = useState(tags);
   const [newRate, setNewRate] = useState(rate);
-  function parseDateTime(date,time) {
-    let dateParts = date.split(' ');
-    dateParts = dateParts[1].split('.');
-    const year = dateParts[2];
-    const month = dateParts[0];
-    const day = dateParts[1];
-    let timeParts = time.split(' ');
-    const ampm = timeParts[1];
-    timeParts = timeParts[0].split(':');
-    let hour = Number(timeParts[0]);
-    if (ampm === 'pm') {
-      hour += 12;
-    }
-    const minute = timeParts[1];
-    return `20${year}-${month}-${day}T${hour}:${minute}`;
-  }
-  function handleSubmit(e) {
 
+  function handleSubmit(e) {
     e.preventDefault();
-    // let intimeInput =
+    const inDT = compileDTstring(
+      document.getElementById('input-indate').value,
+      document.getElementById('input-intime').value
+    );
     const submission = {
       // '2020-12-12 7:15:21 -10:00'
-      intime: new Date(document.getElementById('input-intime').value.replace('T', ' ')).toString(),
-      outtime: document.getElementById('input-outtime').value.replace('T', ' '),
+      intime: compileDTstring(
+        document.getElementById('input-indate').value,
+        document.getElementById('input-intime').value
+      ),
+      outtime: outtime ? compileDTstring(
+        document.getElementById('input-outdate').value,
+        document.getElementById('input-outtime').value
+      ) : null,
       rate: 10,
     };
-    console.log(submission);
-    clientUtils.editLogEntry(user.id, logEntry.id, submission, log, setLog, setEditLogEntry);
+    editLogEntry(user.id, logEntry.id, submission, log, setLog, setEditLogEntry, setCurrentClock);
   }
   function close(){
     setEntry({});
@@ -55,20 +48,36 @@ const EditLog = ({ logEntry, userTags, user, setEntry }) =>{
         <h2>Edit Log Entry</h2>
         <label>
           Start
-          <input id="input-intime" type="datetime-local" defaultValue={parseDateTime(indate, intime)} />
+          {/* <input id="input-intime" type="datetime-local" defaultValue={parseDateTime(indate, intime)} /> */}
+          <input id="input-indate" type="date" defaultValue={parseDate(indate)}/>
+          <input id="input-intime" type="time" defaultValue={parseTime(intime)}/>
         </label>
-        <label>
-          End
-          <input
-            id="input-outtime"
-            type="datetime-local"
-            defaultValue={
-              outdate && outtime
-                ? parseDateTime(outdate, outtime)
-                : parseDateTime(indate, intime)
-            }
-          />
-        </label>
+        {
+          outtime && (
+            <label>
+              End
+              {/* <input id="input-intime" type="datetime-local" defaultValue={parseDateTime(indate, intime)} /> */}
+              <input id="input-outdate" type="date" defaultValue={parseDate(outdate)}/>
+              <input id="input-outtime" type="time" defaultValue={parseTime(outtime)}/>
+            </label>
+          )
+        }
+        {
+          /*
+          <label>
+            End
+            <input
+              id="input-outtime"
+              type="datetime-local"
+              defaultValue={
+                outdate && outtime
+                  ? parseDateTime(outdate, outtime)
+                  : parseDateTime(indate, intime)
+              }
+            />
+          </label>
+           */
+        }
         <Tagger
           currentTags={newTags}
           tagSetter={setNewTags}
