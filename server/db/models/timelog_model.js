@@ -15,6 +15,7 @@ module.exports = {
             to_char( out_time, 'HH:MI am' ) AS outTime,
             to_char( total_time, 'HH24h MIm SSs' ) AS totalTime,
             in_time AS inTimeObj,
+            out_time AS outTimeObj,
             rate, 
             value, 
             (SELECT array(

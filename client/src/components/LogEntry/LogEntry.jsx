@@ -16,7 +16,7 @@ export const LogEntry = (props) => {
     <div className={`log-entry ${!entry.outtime ? "current" : ""}`}>
       <div className="datetime-info">
         <LogEntryDates indate={entry.indate} outdate={entry.outdate} />
-        <LogEntryTimes intime={entry.intime} outtime={entry.outtime} />
+        <LogEntryTimes intimeObj={entry.intimeobj} outtimeObj={entry.outtimeobj} />
         <LogEntryNums entry={entry} />
         <LogEntryValue value={entry.value} />
         {/*
