@@ -110,7 +110,7 @@ module.exports = {
           `
           UPDATE timelogs
           SET
-            in_time = TO_TIMESTAMP($1, 'YYYY-MM-DD HH24:MI:SS'),
+            in_time = $1::timestamptz,
             out_time = TO_TIMESTAMP($2, 'YYYY-MM-DD HH24:MI:SS'),
             rate = $3::INTEGER,
             total_time = 

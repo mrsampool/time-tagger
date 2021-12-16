@@ -3,54 +3,29 @@ import React from "react";
 
 //Stylesheet
 import "./LogEntry.css";
+import LogEntryDates from "../LogEntryDates/LogEntryDates.jsx";
+import LogEntryTimes from "../LogEntryTimes/LogEntryTimes.jsx";
+import LogEntryNums from "../LogEntryNums/LogEntryNums.jsx";
+import LogEntryValue from "../LogEntryValue/LogEntryValue.jsx";
+import LogEntryTags from "../LogEntryTags/LogEntryTags.jsx";
 
 export const LogEntry = (props) => {
   const { entry, editEntry } = props;
+  console.log(new Date(entry.intimeobj));
   return (
     <div className={`log-entry ${!entry.outtime ? "current" : ""}`}>
       <div className="datetime-info">
-        <div className="data-field dates">
-          <span>{entry.indate}</span>
-          {entry.outdate !== entry.indate ? <span>{entry.outdate}</span> : null}
-        </div>
-        <div className="data-field times">
-          <span>{entry.intime}</span>
-          <span className="out-time">{entry.outtime || "CURRENT"}</span>
-        </div>
-        <div className="data-field numbers">
-          {
-            entry && entry.outtime && entry.totaltime && entry.totaltime.length &&
-            <span>{
-              entry.totaltime
-                .split(' ')
-                .filter((section) => {
-                  return section.indexOf('00h') === -1 && section.indexOf('00m') === -1;
-                })
-                .join(' ')
-            }</span>
-          }
-          <span>${entry.rate / 100}/hr</span>
-        </div>
-        {entry.value !== null ? (
-          <div className="data-field value">
-            <span>{entry.value !== null ? `$${entry.value / 100}` : ""}</span>
+        <LogEntryDates indate={entry.indate} outdate={entry.outdate} />
+        <LogEntryTimes intime={entry.intime} outtime={entry.outtime} />
+        <LogEntryNums entry={entry} />
+        <LogEntryValue value={entry.value} />
+        {/*
+          <div>
+            <button onClick={() => { editEntry(entry); }}>EDIT</button>
           </div>
-        ) : null}
-        <div>
-          <button onClick={() => { editEntry(entry); }}>EDIT</button>
-        </div>
+        */}
       </div>
-      <div className="tags">
-        {entry.tags.length
-          ? entry.tags.map((tag, index) => {
-            return (
-                <span className="tag" key={`logentrytag${tag}${index}`}>
-                  {tag}
-                </span>
-            );
-          })
-          : null}
-      </div>
+      <LogEntryTags tags={entry.tags} />
     </div>
   );
 };

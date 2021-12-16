@@ -27,11 +27,13 @@ export const App = (props) => {
   const [currentDlrs, setCurrentDlrs] = useState(0);
   const [currentRate, setCurrentRate] = useState(50);
   const [editLogEntry, setEditLogEntry] = useState({
+    /*
     id: 1,
     indate: 'Fri 12.10.21',
     intime: '1:20 pm',
     tags: [],
     rate: 5000,
+     */
   });
 
   const [log, setLog] = useState([]);

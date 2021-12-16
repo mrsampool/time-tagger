@@ -33,9 +33,12 @@ const EditLog = ({ logEntry, userTags, user, setEntry }) =>{
     return `20${year}-${month}-${day}T${hour}:${minute}`;
   }
   function handleSubmit(e) {
+
     e.preventDefault();
+    // let intimeInput =
     const submission = {
-      intime: document.getElementById('input-intime').value.replace('T', ' '),
+      // '2020-12-12 7:15:21 -10:00'
+      intime: new Date(document.getElementById('input-intime').value.replace('T', ' ')).toString(),
       outtime: document.getElementById('input-outtime').value.replace('T', ' '),
       rate: 10,
     };
