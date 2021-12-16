@@ -22,7 +22,7 @@ export var Clock = function ({
   userTags,
   user
 }) {
-  const { intime, rate, tags } = currentClock;
+  const { intime, rate, tags, intimeobj } = currentClock;
 
   return (
     <div id="Clock">
@@ -42,7 +42,11 @@ export var Clock = function ({
       <div className={`clocked-since ${clockedIn ? 'in' : 'out'}`}>
         <p className="clocked-time-label">clocked in since:</p>
         <div>
-          <span id="clocked-time">{intime || '-'}</span>
+          <span id="clocked-time">{
+            intimeobj
+            ? intimeobj.toLocaleTimeString()
+            : '-'
+          }</span>
           <span id="clocked-dlrs">{currentDlrs || '-'}</span>
         </div>
       </div>
