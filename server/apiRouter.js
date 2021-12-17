@@ -1,6 +1,7 @@
 const apiRouter = require('express').Router();
 const passport = require('passport');
 const controller = require('./controller');
+const users = require('./db/models/users_model');
 
 // TODO: apiRouter.get('/users', handler);
 // TODO: apiRouter.get('/users/:userId', handler);
@@ -11,7 +12,9 @@ apiRouter.put('/users/:userId/log/:logId', controller.editEntry);
 apiRouter.post('/users', controller.createUser);
 apiRouter.get('/users/current', (req, res, next) => {
   if (req.user) {
-    res.json({ user: req.user });
+    console.log(req.user);
+    users.find(req.user.email).then((dbUser) => res.json({ user: dbUser }));
+    // res.json({ user: req.user });
   } else {
     res.status(200).send();
   }
