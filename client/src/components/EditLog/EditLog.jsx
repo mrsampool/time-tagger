@@ -55,6 +55,7 @@ const EditLog = ({ logEntry, userTags, user, setEntry, setCurrentClock }) =>{
         document.getElementById('input-outtime').value
       ) : null,
       rate: newRate * 100,
+      tags: newTags
     };
     console.log(JSON.stringify(submission));
     getLogSchema(new Date(submission.intime), submission.outtime ? new Date(submission.outtime) : null)
