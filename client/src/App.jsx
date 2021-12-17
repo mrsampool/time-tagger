@@ -68,7 +68,6 @@ export const App = (props) => {
   }
 
   function logOut() {
-    console.log("logOut");
     axios
       .get(`/api/logout`)
       .then((data) => {

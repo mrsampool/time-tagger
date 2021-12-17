@@ -76,7 +76,6 @@ export const clientUtils = {
     axios
       .put(`/api/users/${userId}/log/${logId}`, { entry })
       .then(({data}) => {
-        console.log(data);
         let newLog = log;
         newLog[log.findIndex(entry => entry.id === logId)] = data;
         setLog(newLog);

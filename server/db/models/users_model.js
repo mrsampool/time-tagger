@@ -45,7 +45,10 @@ module.exports = {
         `,
           [email],
         )
-        .then(({ rows }) => resolve(rows[0]))
+        .then(({ rows }) => {
+          console.log(rows);
+          resolve(rows[0]);
+        })
         .catch(reject);
     });
   },

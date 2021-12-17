@@ -115,8 +115,7 @@ module.exports = {
             in_time = $1::timestamptz,
             out_time = $2::timestamptz,
             rate = $3::INTEGER,
-            total_time = 
-              $2::timestamptz - $1::timestamptz,
+            total_time = $2::timestamptz - $1::timestamptz,
             value = (EXTRACT(epoch FROM ($2::timestamptz - $1::timestamptz)) / 3600) * $3
           WHERE id = $4
           RETURNING 

@@ -29,7 +29,6 @@ module.exports = {
             timelog
               .queryByLogId(inserted)
               .then((data) => {
-                console.log(data[0]);
                 res.status(201).send(data[0]);
                 resolve();
               })
@@ -41,7 +40,6 @@ module.exports = {
   },
 
   clockOut: function clockOut(req, res, next) {
-    console.log('clock out');
     return new Promise((resolve, reject) => {
       timelog
         .clockOut(req.params.userId)
@@ -57,7 +55,6 @@ module.exports = {
           .then(() => {
             timelog.queryByLogId(entry)
               .then((data) => {
-                console.log(data);
                 res.status(201).send(data[0]);
               })
               .catch((err) => console.log(err));
