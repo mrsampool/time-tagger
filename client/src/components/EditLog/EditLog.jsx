@@ -39,7 +39,7 @@ const EditLog = ({ logEntry, userTags, user, setEntry, setCurrentClock }) =>{
   const { log, setLog, setEditLogEntry } = useContext(AppContext);
   const { tags, rate, indate, outdate, intime, outtime } = logEntry;
   const [newTags, setNewTags] = useState(tags);
-  const [newRate, setNewRate] = useState(rate);
+  const [newRate, setNewRate] = useState(rate / 100);
   const [warnMessage, setWarnMessage] = useState('');
 
   function handleSubmit(e) {
@@ -54,7 +54,7 @@ const EditLog = ({ logEntry, userTags, user, setEntry, setCurrentClock }) =>{
         document.getElementById('input-outdate').value,
         document.getElementById('input-outtime').value
       ) : null,
-      rate: Number(document.getElementById('edit-log').querySelector('#input-rate').value) * 100,
+      rate: newRate * 100,
     };
     getLogSchema(new Date(submission.intime), submission.outtime ? new Date(submission.outtime) : null)
       .validate(submission)
