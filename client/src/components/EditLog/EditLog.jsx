@@ -20,10 +20,6 @@ const EditLog = ({ logEntry, userTags, user, setEntry, setCurrentClock }) =>{
 
   function handleSubmit(e) {
     e.preventDefault();
-    const inDT = compileDTstring(
-      document.getElementById('input-indate').value,
-      document.getElementById('input-intime').value
-    );
     const submission = {
       // '2020-12-12 7:15:21 -10:00'
       intime: compileDTstring(
@@ -34,7 +30,7 @@ const EditLog = ({ logEntry, userTags, user, setEntry, setCurrentClock }) =>{
         document.getElementById('input-outdate').value,
         document.getElementById('input-outtime').value
       ) : null,
-      rate: 10,
+      rate: Number(document.getElementById('edit-log').querySelector('#input-rate').value) * 100,
     };
     editLogEntry(user.id, logEntry.id, submission, log, setLog, setEditLogEntry, setCurrentClock);
   }
