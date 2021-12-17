@@ -14,28 +14,32 @@ import AppContext from "../../AppContext.jsx";
 import './EditLog.css';
 import Warn from "../Warn/Warn.jsx";
 
-const getLogSchema = (intime, outtime) => yup.object().shape({
-  intime: yup
-    .date()
-    .required('Start date & time are required')
-    .max(outtime, 'Start-time must be before end-time'),
-  outtime: yup.date()
-    .required('End date & time are required')
-    .min(intime, 'End-time must be after start-time'),
-  rate: yup.number()
-    .required('Rate is required')
-    .min(0, `Rate can't be less than zero.`)
-});
+const getLogSchema = (intime, outtime) => {
+  console.log(intime, outtime);
+  return outtime ? yup.object().shape({
+    intime: yup.date()
+      .required('Start date & time are required')
+      .max(outtime, 'Start-time must be before end-time'),
+    outtime: yup.date()
+      .min(intime, 'End-time must be after start-time'),
+    rate: yup.number()
+      .required('Rate is required')
+      .min(0, `Rate can't be less than zero.`)
+  }) : yup.object().shape({
+    intime: yup.date()
+      .required('Start date & time are required')
+      .max(new Date(), `Start-time can't be in the future`),
+    rate: yup.number()
+      .required('Rate is required')
+      .min(0, `Rate can't be less than zero.`)
+  });
+}
 
 const EditLog = ({ logEntry, userTags, user, setEntry, setCurrentClock }) =>{
   const { log, setLog, setEditLogEntry } = useContext(AppContext);
   const { tags, rate, indate, outdate, intime, outtime } = logEntry;
   const [newTags, setNewTags] = useState(tags);
   const [newRate, setNewRate] = useState(rate);
-  const [startDate, setStartDate] = useState(parseDate(indate));
-  const [startTime, setStartTime] = useState(parseTime(intime));
-  const [endDate, setEndDate] = useState(outdate ? parseDate(outdate) : null);
-  const [endTime, setEndTime] = useState(outtime ? parseTime(outtime) : null);
   const [warnMessage, setWarnMessage] = useState('');
 
   function handleSubmit(e) {
@@ -52,7 +56,7 @@ const EditLog = ({ logEntry, userTags, user, setEntry, setCurrentClock }) =>{
       ) : null,
       rate: Number(document.getElementById('edit-log').querySelector('#input-rate').value) * 100,
     };
-    getLogSchema(new Date(submission.intime), new Date(submission.outtime))
+    getLogSchema(new Date(submission.intime), submission.outtime ? new Date(submission.outtime) : null)
       .validate(submission)
       .then((validated) => {
         editLogEntry(user.id, logEntry.id, validated, log, setLog, setEditLogEntry, setCurrentClock);
@@ -73,9 +77,9 @@ const EditLog = ({ logEntry, userTags, user, setEntry, setCurrentClock }) =>{
           <input
             id="input-indate"
             type="date"
-            defaultValue={startDate}
+            defaultValue={parseDate(indate)}
           />
-          <input id="input-intime" type="time" defaultValue={startTime} onChange={(e) => setStartTime(e.target.value)}/>
+          <input id="input-intime" type="time" defaultValue={parseTime(intime)} />
         </label>
         {
           outtime && (
