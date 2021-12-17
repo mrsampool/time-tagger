@@ -6,7 +6,7 @@ export const clientUtils = {
     axios
       .get(`/api/users/${userId}/log`)
       .then(({ data }) => {
-        setLog(data.reverse());
+        setLog(data);
         const current = data.find((logEntry) => !logEntry.outtime);
         if (current) {
           setClockedIn(true);
@@ -122,11 +122,12 @@ export const clientUtils = {
   },
 
   parseTime: function parseTime(time) {
+    console.log(time);
     let timeParts = time.split(' ');
     const ampm = timeParts[1];
     timeParts = timeParts[0].split(':');
     let hour = Number(timeParts[0]);
-    if (ampm === 'pm') {
+    if (ampm === 'PM') {
       hour += 12;
     }
     hour = clientUtils.pad(hour);

@@ -27,7 +27,8 @@ module.exports = {
                 GROUP BY t1.tag_id, t2.tag_name
             ) AS TAGS)
         FROM timelogs
-        WHERE user_id=$1;
+        WHERE user_id=$1
+        ORDER BY id DESC;
         `, [userId])
         .then(({ rows }) => resolve(rows))
         .catch(reject);

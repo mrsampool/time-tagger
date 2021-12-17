@@ -37,7 +37,7 @@ const getLogSchema = (intime, outtime) => {
 
 const EditLog = ({ logEntry, userTags, user, setEntry, setCurrentClock }) =>{
   const { log, setLog, setEditLogEntry } = useContext(AppContext);
-  const { tags, rate, indate, outdate, intime, outtime } = logEntry;
+  const { tags, rate, indate, outdate, intime, outtime, intimeobj, outtimeobj } = logEntry;
   const [newTags, setNewTags] = useState(tags);
   const [newRate, setNewRate] = useState(rate / 100);
   const [warnMessage, setWarnMessage] = useState('');
@@ -56,6 +56,7 @@ const EditLog = ({ logEntry, userTags, user, setEntry, setCurrentClock }) =>{
       ) : null,
       rate: newRate * 100,
     };
+    console.log(submission);
     getLogSchema(new Date(submission.intime), submission.outtime ? new Date(submission.outtime) : null)
       .validate(submission)
       .then((validated) => {
@@ -79,14 +80,26 @@ const EditLog = ({ logEntry, userTags, user, setEntry, setCurrentClock }) =>{
             type="date"
             defaultValue={parseDate(indate)}
           />
-          <input id="input-intime" type="time" defaultValue={parseTime(intime)} />
+          <input
+            id="input-intime"
+            type="time"
+            defaultValue={parseTime(new Date(intimeobj).toLocaleTimeString())}
+          />
         </label>
         {
           outtime && (
             <label>
               End
-              <input id="input-outdate" type="date" defaultValue={parseDate(outdate)} />
-              <input id="input-outtime" type="time" defaultValue={parseTime(outtime)} />
+              <input
+                id="input-outdate"
+                type="date"
+                defaultValue={parseDate(outdate)}
+              />
+              <input
+                id="input-outtime"
+                type="time"
+                defaultValue={parseTime(new Date(outtimeobj).toLocaleTimeString('en-US'))}
+              />
             </label>
           )
         }
