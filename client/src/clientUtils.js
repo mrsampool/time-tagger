@@ -122,7 +122,6 @@ export const clientUtils = {
   },
 
   parseTime: function parseTime(time) {
-    console.log(time);
     let timeParts = time.split(' ');
     const ampm = timeParts[1];
     timeParts = timeParts[0].split(':');
@@ -137,22 +136,27 @@ export const clientUtils = {
   },
 
   compileDTstring: function compileDateTimeString(dateString, timeString){
-    let dtObj = new Date(`${dateString} ${timeString}`);
-    return `${
+    console.log(`dateString: ${dateString}`);
+    console.log(`timeString: ${timeString}`);
+    let constructorStr = `${dateString}T${timeString}:00`;
+    console.log(`constructor string: ${constructorStr}`);
+    let dtObj = new Date(`${dateString}T${timeString}:00`);
+    console.log(dtObj.toString());
+    let compiled = `${
       dtObj.getFullYear()
     }-${
       clientUtils.pad(dtObj.getMonth() + 1)
     }-${
       clientUtils.pad(dtObj.getDate())
-    } ${
+    }T${
       clientUtils.pad(dtObj.getHours())
     }:${
       clientUtils.pad(dtObj.getMinutes())
     }:${
       clientUtils.pad(dtObj.getSeconds())
-    } ${
-      -(dtObj.getTimezoneOffset() / 60)
-    }:00`
+    }`;
+    console.log(`compiled: ${compiled}`);
+    return compiled;
   },
 
   EmptyClock: {

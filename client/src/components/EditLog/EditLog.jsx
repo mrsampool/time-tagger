@@ -56,7 +56,7 @@ const EditLog = ({ logEntry, userTags, user, setEntry, setCurrentClock }) =>{
       ) : null,
       rate: newRate * 100,
     };
-    console.log(submission);
+    console.log(JSON.stringify(submission));
     getLogSchema(new Date(submission.intime), submission.outtime ? new Date(submission.outtime) : null)
       .validate(submission)
       .then((validated) => {
