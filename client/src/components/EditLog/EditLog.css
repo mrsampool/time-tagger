@@ -45,6 +45,9 @@
     border-bottom: 0.25rem solid var(--light);
     margin: 1rem 0;
 }
+#edit-log .warn.false{
+    display: none;
+}
 .red{
     background-color: salmon;
 }

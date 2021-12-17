@@ -1,0 +1,12 @@
+.warn{
+    width: fit-content;
+    background-color: salmon;
+    font-weight: bold;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    opacity: 0;
+    color: maroon;
+}
+.warn.true{
+    opacity: 1;
+}

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import * as yup from 'yup';
 
 import "./Auth.css";
+import Warn from "../Warn/Warn.jsx";
 
 const logInSchema = yup.object().shape({
   email: yup
@@ -109,10 +110,7 @@ export const Auth = ({ logIn, createAccount, setUser }) => {
               </button>
             )
         }
-        <p className={`login-fail ${!!warn}`}>
-          {warn}
-          <button type="button" onClick={()=>{setWarn('')}}>OK</button>
-        </p>
+        <Warn message={warn} setMessage={setWarn} />
       </form>
       <div id="other-options">
         {
